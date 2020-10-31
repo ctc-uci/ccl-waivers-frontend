@@ -1,0 +1,15 @@
+.dashboard-sidebar,
+.dashboard-content {
+    border: 1px solid #000;
+    padding: 10px;
+    display: inline-block;
+}
+
+.dashboard-sidebar {
+    max-width: 20vw;
+    margin-right: 10px;
+}
+
+.dashboard-content {
+    max-width: 60vw;
+}
