@@ -6,40 +6,41 @@ import {
   Link,
   Route,
 } from 'react-router-dom';
+import waivers from './waivers';
 
 function Waivers() {
+  const waiverItems = waivers.info.map((waiver) => (
+    <>
+      <div className="waiver-item">
+        <p>{waiver.waiver}</p>
+        <p>{waiver.name}</p>
+        <p>{waiver.date}</p>
+        <button type="button">
+          <img src="https://image.flaticon.com/icons/png/512/60/60721.png" alt="download button" width="15" />
+        </button>
+        <button type="button">
+          <img src="https://cdn.onlinewebfonts.com/svg/img_416864.png" alt="delete button" width="15" />
+        </button>
+      </div>
+    </>
+  ));
   return (
-    <div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
-      <div className="waiver-row">waiver #1</div>
-      <div className="waiver-row">waiver #2</div>
-      <div className="waiver-row">waiver #3</div>
-      <div className="waiver-row">waiver #4</div>
-      <div className="waiver-row">waiver #5</div>
+    <div className="waiver-list">
+      <div className="table-operations">
+        <button type="button">
+          Sort
+        </button>
+        <button type="button">
+          Filter
+        </button>
+        <div style={{ display: 'inline-block', float: 'right' }}>
+          <input type="search" />
+          <button type="button">
+            Search
+          </button>
+        </div>
+      </div>
+      {waiverItems}
     </div>
   );
 }
