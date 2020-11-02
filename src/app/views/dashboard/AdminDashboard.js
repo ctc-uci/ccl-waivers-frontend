@@ -1,4 +1,4 @@
-import './Dashboard.css';
+import './AdminDashboard.css';
 import {
   BrowserRouter as Router,
   Switch,
