@@ -7,6 +7,7 @@ import {
   Route,
 } from 'react-router-dom';
 import waivers from './waivers';
+import WaiverTemplates from './WaiverTemplates';
 
 function Waivers() {
   const waiverItems = waivers.info.map((waiver) => (
@@ -58,9 +59,9 @@ function Dashboard() {
       component: () => <p>volunteers</p>,
     },
     {
-      name: 'Forms',
-      route: '/forms',
-      component: () => <p>forms</p>,
+      name: 'Waiver Templates',
+      route: '/admin/templates',
+      component: WaiverTemplates,
     },
   ];
 
