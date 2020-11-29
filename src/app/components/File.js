@@ -21,9 +21,21 @@ class File extends Component {
     const { imagePreview } = this.props;
     const isLinkClicked = this.state;
 
+    const uploadImgStyle = {
+      margin: 'auto',
+      marginBottom: 0,
+      display: 'block',
+      width: '50px',
+    };
+
+    const linkStyle = {
+      color: 'blue',
+      textDecoration: 'none',
+    };
+
     return (
       <div>
-        <img src={imagePreview} alt="file preview" />
+        <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
         <h1>{name}</h1>
         <text>
           Created
@@ -31,7 +43,7 @@ class File extends Component {
           {dateCreated}
         </text>
         <br />
-        <a style={{ color: 'blue' }} href={url} onClick={this.handleClick}>{isLinkClicked.copiedLink ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
+        <a style={linkStyle} href={url} onClick={this.handleClick}>{isLinkClicked.copiedLink ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
       </div>
     );
   }
