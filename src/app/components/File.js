@@ -25,10 +25,9 @@ class File extends Component {
     const isLinkClicked = this.state;
 
     const uploadImgStyle = {
-      margin: 'auto',
-      marginBottom: 0,
-      display: 'block',
-      width: '50px',
+      height: 'contain',
+      width: '154px',
+      marginTop: '42px',
     };
 
     const linkStyle = {
@@ -39,7 +38,8 @@ class File extends Component {
     return (
       <div>
         <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
-        <h1>{name}</h1>
+        <b>{name}</b>
+        <br />
         <text>
           Created
           {' '}
