@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class File extends Component {
   constructor(props) {
     super(props);
-    this.state = { copiedLink: true };
+    this.state = {
+      isCopied: false,
+    };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
     this.setState((prevState) => ({
-      copiedLink: !(prevState.copiedLink),
+      isCopied: !(prevState.isCopied),
     }));
   }
 
@@ -43,7 +46,9 @@ class File extends Component {
           {dateCreated}
         </text>
         <br />
-        <a style={linkStyle} href={url} onClick={this.handleClick}>{isLinkClicked.copiedLink ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
+        <CopyToClipboard text={url}>
+          <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
+        </CopyToClipboard>
       </div>
     );
   }

@@ -32,7 +32,7 @@ function WaiverTemplate() {
 
   return (
     <div style={templateStyle}>
-      <File name="fileName" url="#" imagePreview="https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png" dateCreated={getDate(new Date())} />
+      <File name="fileName" url="ctc-uci.com" imagePreview="https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png" dateCreated={getDate(new Date())} />
     </div>
   );
 }
