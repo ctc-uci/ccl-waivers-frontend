@@ -18,9 +18,6 @@ function WaiverTemplates() {
 
 function WaiverTemplate() {
   const templateStyle = {
-    height: '200px',
-    width: '154px',
-    border: '1px solid black',
     marginLeft: '40px',
     marginTop: '40px',
   };
@@ -69,10 +66,10 @@ class WaiverTemplates extends Component {
         <WaiverTemplate />
         <WaiverTemplate />
         <WaiverTemplate />
-        {/* <WaiverTemplate />
         <WaiverTemplate />
         <WaiverTemplate />
-        <WaiverTemplate /> */}
+        <WaiverTemplate />
+        <WaiverTemplate />
       </div>
     );
   }

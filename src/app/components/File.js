@@ -28,7 +28,9 @@ class File extends Component {
       margin: 'auto',
       marginBottom: 0,
       display: 'block',
-      width: '50px',
+      height: '200px',
+      width: '154px',
+      border: '1px solid black',
     };
 
     const linkStyle = {
@@ -39,16 +41,17 @@ class File extends Component {
     return (
       <div>
         <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
-        <h1>{name}</h1>
-        <text>
-          Created
-          {' '}
-          {dateCreated}
-        </text>
-        <br />
-        <CopyToClipboard text={url}>
-          <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
-        </CopyToClipboard>
+        <div>
+          <h3 style={{ marginBottom: '2px', marginTop: '4px' }}>{name}</h3>
+          <div>
+            Created
+            {' '}
+            {dateCreated}
+          </div>
+          <CopyToClipboard text={url}>
+            <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }</a>
+          </CopyToClipboard>
+        </div>
       </div>
     );
   }
