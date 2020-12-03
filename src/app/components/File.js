@@ -25,9 +25,17 @@ class File extends Component {
     const isLinkClicked = this.state;
 
     const uploadImgStyle = {
-      height: 'contain',
+      // height: 'contain',
+      // width: '154px',
+      // marginTop: '42px',
+
+      margin: 'auto',
+      marginBottom: 0,
+      display: 'block',
+      height: '200px',
       width: '154px',
-      marginTop: '42px',
+      border: '1px solid black',
+
     };
 
     const linkStyle = {
@@ -38,17 +46,30 @@ class File extends Component {
     return (
       <div>
         <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
-        <b>{name}</b>
-        <br />
-        <text>
-          Created
-          {' '}
-          {dateCreated}
-        </text>
-        <br />
-        <CopyToClipboard text={url}>
-          <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
-        </CopyToClipboard>
+        {/* // <b>{name}</b>
+        // <br />
+        // <text>
+        //   Created
+        //   {' '}
+        //   {dateCreated}
+        // </text>
+        // <br />
+        // <CopyToClipboard text={url}>
+        //   <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied
+        ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
+        // </CopyToClipboard> */}
+
+        <div>
+          <h3 style={{ marginBottom: '2px', marginTop: '4px' }}>{name}</h3>
+          <div>
+            Created
+            {' '}
+            {dateCreated}
+          </div>
+          <CopyToClipboard text={url}>
+            <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }</a>
+          </CopyToClipboard>
+        </div>
       </div>
     );
   }
