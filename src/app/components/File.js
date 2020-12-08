@@ -1,85 +1,71 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-class File extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCopied: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+const File = (props) => {
+  const [isCopied, setCopied] = useState(false);
 
-  handleClick() {
-    this.setState((prevState) => ({
-      isCopied: !(prevState.isCopied),
-    }));
-  }
+  // const getCopiedId = () => {
+  //   const selectedId = props.tempData.id;
+  //   this.handleCopied(selectedId);
+  // };
 
-  render() {
-    const { name } = this.props;
-    const { dateCreated } = this.props;
-    const { url } = this.props;
-    const { imagePreview } = this.props;
-    const isLinkClicked = this.state;
+  const {
+    fileName, url, date, id,
+  } = props;
+  const imagePreview = 'https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png';
 
-    const uploadImgStyle = {
-      // height: 'contain',
-      // width: '154px',
-      // marginTop: '42px',
+  const uploadImgStyle = {
+    height: '200px',
+    width: '154px',
+    border: '1px solid black',
+    marginRight: '50px',
+    display: 'flex',
 
-      margin: 'auto',
-      marginBottom: 0,
-      display: 'block',
-      height: '200px',
-      width: '154px',
-      border: '1px solid black',
+    // margin: 'auto',
+    // marginBottom: 0,
+    // display: 'block',
+    // height: '200px',
+    // width: '154px',
+    // border: '1px solid black',
 
-    };
+  };
 
-    const linkStyle = {
-      color: 'blue',
-      textDecoration: 'none',
-    };
+  const linkStyle = {
+    color: 'blue',
+    textDecoration: 'none',
+  };
 
-    return (
+  const handleCopied = () => {
+    console.log('copied', id);
+    props.getId(id);
+    setCopied(!isCopied);
+  };
+
+  return (
+    <div>
+      <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
       <div>
-        <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
-        {/* // <b>{name}</b>
-        // <br />
-        // <text>
-        //   Created
-        //   {' '}
-        //   {dateCreated}
-        // </text>
-        // <br />
-        // <CopyToClipboard text={url}>
-        //   <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied
-        ? '\u2713 Link Copied to Clipboard' : '\u26D3 Click Link' }</a>
-        // </CopyToClipboard> */}
-
+        <h3 style={{ marginBottom: '2px', marginTop: '4px' }}>{fileName}</h3>
         <div>
-          <h3 style={{ marginBottom: '2px', marginTop: '4px' }}>{name}</h3>
-          <div>
-            Created
-            {' '}
-            {dateCreated}
-          </div>
-          <CopyToClipboard text={url}>
-            <a style={linkStyle} href="# " onClick={this.handleClick}>{isLinkClicked.isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }</a>
-          </CopyToClipboard>
+          Created
+          {' '}
+          {date}
         </div>
+        <CopyToClipboard text={url}>
+          <a style={linkStyle} href="# " onClick={handleCopied}>{isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }</a>
+        </CopyToClipboard>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 File.propTypes = {
-  name: PropTypes.string.isRequired,
-  dateCreated: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  fileName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  imagePreview: PropTypes.string.isRequired,
+  getId: PropTypes.func.isRequired,
 };
 
 export default File;
