@@ -31,11 +31,6 @@ const File = (props) => {
 
   };
 
-  const linkStyle = {
-    color: 'blue',
-    textDecoration: 'none',
-  };
-
   const handleCopied = () => {
     console.log('copied', id);
     props.getId(id);
@@ -53,7 +48,17 @@ const File = (props) => {
           {date}
         </div>
         <CopyToClipboard text={url}>
-          <a style={linkStyle} href="# " onClick={handleCopied}>{isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }</a>
+          <a
+            style={{
+              color: 'blue',
+              textDecoration: 'none',
+            }}
+            href="# "
+            onClick={handleCopied}
+          >
+            {isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }
+
+          </a>
         </CopyToClipboard>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import File from '../../components/File';
 import cloudUpload from '../../images/dashboard/cloud-upload.png';
 import templates from './templates';
+import Popup from '../../components/Popup';
 
 // function WaiverTemplate() {
 //   const templateStyle = {
@@ -84,11 +85,17 @@ const WaiverTemplates = () => {
 
   // }
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const getDate = (uploadDate) => {
     const date = `${uploadDate.toLocaleDateString(undefined, { month: 'short' })}
   ${uploadDate.toLocaleDateString(undefined, { day: '2-digit' })},
   ${uploadDate.toLocaleDateString(undefined, { year: 'numeric' })}`;
     return date;
+  };
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
   };
 
   // STYLING TEMPLATES
@@ -149,10 +156,23 @@ const WaiverTemplates = () => {
   // RENDERING TEMPLATE MANAGER PAGE
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }} className="waiver-list">
-      <div style={uploadStyle}>
-        <img style={uploadImgStyle} src={cloudUpload} alt="upload to cloud" />
-        <div style={{ margin: 'auto', marginTop: '4px' }}>Upload template</div>
-      </div>
+      <a href="#  " onClick={togglePopup}>
+        <div style={uploadStyle}>
+          <img
+            style={uploadImgStyle}
+            src={cloudUpload}
+            alt="upload to cloud"
+          />
+          {showPopup ? <Popup /> : null}
+          <div style={{
+            margin: 'auto', marginTop: '4px', color: 'black', textDecoration: 'none',
+          }}
+          >
+            Upload template
+          </div>
+        </div>
+      </a>
+
       <div style={templateStyle}>
         {templateList}
       </div>
