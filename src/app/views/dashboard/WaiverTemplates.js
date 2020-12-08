@@ -156,22 +156,25 @@ const WaiverTemplates = () => {
   // RENDERING TEMPLATE MANAGER PAGE
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }} className="waiver-list">
-      <a href="#  " onClick={togglePopup}>
-        <div style={uploadStyle}>
+      <div style={uploadStyle}>
+        <a
+          style={{
+            margin: 'auto', marginTop: '60px', color: 'black', textDecoration: 'none',
+          }}
+          href="#  "
+          onClick={togglePopup}
+        >
           <img
             style={uploadImgStyle}
             src={cloudUpload}
             alt="upload to cloud"
           />
-          {showPopup ? <Popup /> : null}
-          <div style={{
-            margin: 'auto', marginTop: '4px', color: 'black', textDecoration: 'none',
-          }}
-          >
+          <div style={{ margin: 'auto', marginTop: '4px' }}>
             Upload template
           </div>
-        </div>
-      </a>
+        </a>
+        {showPopup ? <Popup closePopup={togglePopup} /> : null}
+      </div>
 
       <div style={templateStyle}>
         {templateList}
