@@ -71,9 +71,10 @@ function Dropzone() {
     <div className="container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag  drop some files here</p>
+        <span style={{ marginBottom: '16px' }}>Drop file to upload</span>
+        <span style={{ marginBottom: '20px' }}>or</span>
         <button type="button" onClick={open}>
-          Open File Dialog
+          Select file
         </button>
       </div>
       <aside>

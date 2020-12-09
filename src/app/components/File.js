@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import linkIcon from '../images/dashboard/link.png';
 
 const File = (props) => {
   const [isCopied, setCopied] = useState(false);
@@ -50,14 +51,14 @@ const File = (props) => {
         <CopyToClipboard text={url}>
           <a
             style={{
-              color: 'blue',
+              color: '#00A3FF',
               textDecoration: 'none',
             }}
             href="# "
             onClick={handleCopied}
           >
-            {isCopied ? '\u2713 Copied' : '\u26D3 Copy Link' }
-
+            <img src={linkIcon} style={{ display: isCopied ? 'none' : 'inline', height: '16px', verticalAlign: 'middle' }} alt="link" />
+            <span style={{ marginLeft: '2px', verticalAlign: 'middle' }}>{isCopied ? '\u2713 Copied' : 'Copy Link'}</span>
           </a>
         </CopyToClipboard>
       </div>

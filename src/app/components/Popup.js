@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from './DropZone';
 
@@ -22,13 +22,28 @@ const Popup = (props) => {
     top: '12%',
     bottom: '12%',
     margin: 'auto',
-    borderRadius: '20px',
+    borderRadius: '10px',
     background: 'white',
+    padding: '30px',
   };
 
   const closeUpload = () => {
     props.closePopup();
   };
+
+  const onKeyDown = (event) => {
+    if (event.keyCode === 27) {
+      closeUpload();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
+  });
 
   return (
     <>
@@ -39,7 +54,7 @@ const Popup = (props) => {
         <h1>
           Upload Template
           {' '}
-          <button onClick={closeUpload} type="button" className="close" aria-label="Close">
+          <button onClick={closeUpload} type="button" className="close" style={{ float: 'right' }} aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </h1>

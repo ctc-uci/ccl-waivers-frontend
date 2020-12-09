@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import File from '../../components/File';
-import cloudUpload from '../../images/dashboard/cloud-upload.png';
+import cloudUploadIcon from '../../images/dashboard/cloud-upload.png';
 import templates from './templates';
 import Popup from '../../components/Popup';
 
@@ -156,25 +156,26 @@ const WaiverTemplates = () => {
   // RENDERING TEMPLATE MANAGER PAGE
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }} className="waiver-list">
-      <div style={uploadStyle}>
-        <a
-          style={{
-            margin: 'auto', marginTop: '60px', color: 'black', textDecoration: 'none',
-          }}
-          href="#  "
-          onClick={togglePopup}
-        >
-          <img
-            style={uploadImgStyle}
-            src={cloudUpload}
-            alt="upload to cloud"
-          />
-          <div style={{ margin: 'auto', marginTop: '4px' }}>
-            Upload template
-          </div>
-        </a>
-        {showPopup ? <Popup closePopup={togglePopup} /> : null}
-      </div>
+      <button
+        type="button"
+        style={{
+          ...uploadStyle,
+          color: 'black',
+          textDecoration: 'none',
+        }}
+        href="#"
+        onClick={togglePopup}
+      >
+        <img
+          style={uploadImgStyle}
+          src={cloudUploadIcon}
+          alt="upload template"
+        />
+        <div style={{ margin: 'auto', marginTop: '4px' }}>
+          Upload template
+        </div>
+      </button>
+      {showPopup ? <Popup closePopup={togglePopup} /> : null}
 
       <div style={templateStyle}>
         {templateList}
