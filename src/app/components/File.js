@@ -35,7 +35,10 @@ const File = (props) => {
   const handleCopied = () => {
     console.log('copied', id);
     props.getId(id);
-    setCopied(!isCopied);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
   };
 
   return (

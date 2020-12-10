@@ -129,29 +129,19 @@ const WaiverTemplates = () => {
     console.log('returned', id);
   };
 
-  const [templateList] = useState(
-    templates.info.map(
-      (temps) => (
-        <File
-          key={temps.id}
-          id={temps.id}
-          fileName={temps.name}
-          date={getDate(temps.date)}
-          url={temps.url}
-          initCopy={false}
-          getId={returnID}
-        />
-      ),
+  const templateList = templates.info.map(
+    (temps) => (
+      <File
+        key={temps.id}
+        id={temps.id}
+        fileName={temps.name}
+        date={getDate(temps.date)}
+        url={temps.url}
+        initCopy={false}
+        getId={returnID}
+      />
     ),
   );
-
-  // const resetCopy = (id) => {
-  //   for (let i = 0; i < templateList.length; i + 1) {
-  //       if templateList[i].File.props.id !== id{
-  //         templateList.[i].props.initCopy = false;
-  //       }
-  //   }
-  // };
 
   // RENDERING TEMPLATE MANAGER PAGE
   return (
