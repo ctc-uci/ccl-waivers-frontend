@@ -1,0 +1,31 @@
+.waiver-table {
+  text-align: left;
+  width: 100%;
+  border-spacing: 20px 0;
+}
+.table-checkbox {
+  margin: 10px 0;
+}
+.waiver-table td,
+.waiver-table th {
+  padding: 10px 0;
+}
+.waiver-search {
+  height: 40px;
+  background-color: lightgrey;
+  width: 300px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.waiver-searchbar {
+  all: unset;
+  color: white;
+  width: 100%;
+}
+.waiver-searchbtn {
+  all: unset;
+  color: white;
+  padding: 0 10px;
+}

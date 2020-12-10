@@ -1,6 +1,8 @@
 # Child Creativity Lab
 
-This read me is a work in progress. Feel free to change stuff or add more!
+## Admin Dashboard
+
+This README is for the admin dashboard component and is a work in progress. Feel free to change stuff or add more!
 
 ### How to run
 
@@ -11,7 +13,12 @@ npm i
 npm start
 ```
 
-The application will be running from localhost:3000
+The application will be running from localhost:3000. Navigate to localhost:3000/admin to see the current admin dashboard.
+
+### Things to Fix
+
+- The `App.js` file is too cluttered and the code should be put in the `views/dashboard` subdirectory.
+- Perhaps have a `Layout.js` component that includes the dashboard header and navbar
 
 ### Recommended vscode settings
 

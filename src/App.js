@@ -1,14 +1,18 @@
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Admin from './Admin';
-import Waiver from './Waiver';
+import {
+  BrowserRouter as Router, Route, Switch,
+} from 'react-router-dom';
+import Admin from './app/views/admin/Admin';
+import Waivers from './app/views/waivers/Waivers';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/" component={Waiver} />
-        <Route path="/admin" component={Admin} />
+        <Switch>
+          <Route exact path="/templates" component={Waivers} />
+          <Route path="/" component={Admin} />
+        </Switch>
       </Router>
     </div>
   );
