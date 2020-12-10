@@ -25,6 +25,7 @@ const Popup = (props) => {
     borderRadius: '10px',
     background: 'white',
     padding: '30px',
+    zIndex: 99999,
   };
 
   const closeUpload = () => {
