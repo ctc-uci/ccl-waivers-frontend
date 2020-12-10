@@ -12,11 +12,11 @@ const File = (props) => {
   // };
 
   const {
-    fileName, url, date, id,
+    fileName, url, date, id, setSelected,
   } = props;
   const imagePreview = 'https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png';
 
-  const uploadImgStyle = {
+  const containerStyle = {
     height: '200px',
     width: '154px',
     border: '1px solid black',
@@ -41,9 +41,16 @@ const File = (props) => {
     }, 1500);
   };
 
+  const handleCheckbox = (e) => {
+    setSelected(id, e.target.value === 'on');
+  };
+
   return (
     <div>
-      <img style={uploadImgStyle} src={imagePreview} alt="file preview" />
+      <div style={containerStyle}>
+        <input style={{ position: 'absolute' }} type="checkbox" onChange={handleCheckbox} />
+        <img style={{ width: '100%' }} src={imagePreview} alt="file preview" />
+      </div>
       <div>
         <h3 style={{ marginBottom: '2px', marginTop: '4px' }}>{fileName}</h3>
         <div>
@@ -75,6 +82,7 @@ File.propTypes = {
   date: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   getId: PropTypes.func.isRequired,
+  setSelected: PropTypes.func.isRequired,
 };
 
 export default File;

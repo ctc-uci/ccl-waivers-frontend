@@ -129,6 +129,16 @@ const WaiverTemplates = () => {
     console.log('returned', id);
   };
 
+  const [filesSelected, setFilesSelected] = useState(templates.info.map(() => false));
+  console.log(filesSelected);
+  // setFilesSelected(filesSelected);
+
+  const setFileSelected = (n, selected) => {
+    filesSelected[n] = selected;
+    console.log(filesSelected);
+    setFilesSelected(filesSelected);
+  };
+
   const templateList = templates.info.map(
     (temps) => (
       <File
@@ -139,6 +149,7 @@ const WaiverTemplates = () => {
         url={temps.url}
         initCopy={false}
         getId={returnID}
+        setSelected={setFileSelected}
       />
     ),
   );
