@@ -1,34 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
-
-const baseStyle = {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '20px',
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
-  borderStyle: 'dashed',
-  backgroundColor: '#fafafa',
-  color: '#bdbdbd',
-  outline: 'none',
-  transition: 'border .24s ease-in-out',
-};
-
-const activeStyle = {
-  borderColor: '#2196f3',
-};
-
-const acceptStyle = {
-  borderColor: '#00e676',
-};
-
-const rejectStyle = {
-  borderColor: '#ff1744',
-};
+import './DropZone.css';
 
 function Dropzone() {
   const {
@@ -42,14 +15,22 @@ function Dropzone() {
   } = useDropzone({ // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
+    accept: 'application/pdf',
   });
 
-  const style = useMemo(() => ({
-    ...baseStyle,
-    ...(isDragActive ? activeStyle : {}),
-    ...(isDragAccept ? acceptStyle : {}),
-    ...(isDragReject ? rejectStyle : {}),
-  }), [
+  const className = useMemo(() => {
+    let base = 'dropzone-zone';
+    if (isDragActive) {
+      base += ' dropzone-active';
+    }
+    if (isDragAccept) {
+      base += ' dropzone-accept';
+    }
+    if (isDragReject) {
+      base += ' dropzone-reject';
+    }
+    return base;
+  }, [
     isDragActive,
     isDragReject,
     isDragAccept,
@@ -69,7 +50,7 @@ function Dropzone() {
 
   return (
     <div className="container">
-      <div {...getRootProps({ style })}>
+      <div className={className} {...getRootProps()}>
         <input {...getInputProps()} />
         <span style={{ marginBottom: '16px' }}>Drop file to upload</span>
         <span style={{ marginBottom: '20px' }}>or</span>

@@ -1,0 +1,43 @@
+.template-file {
+    width: 154px;
+    margin-left: 50px;
+    margin-top: 40px;
+    flex-direction: row;
+}
+
+.template-thumbnail {
+    height: 200px;
+    width: 154px;
+    border: 1px solid black;
+    margin-right: 50px;
+    display: flex;
+    position: relative;
+}
+
+.template-checkbox {
+    position: absolute;
+}
+
+.template-thumbnail-img {
+    width: 100%;
+}
+
+.template-title {
+    margin-bottom: 2px;
+    margin-top: 4px;
+}
+
+.template-copy-link {
+    color: #00A3FF;
+    text-decoration: none;
+}
+
+.template-copy-icon {
+    height: 16px;
+    vertical-align: middle;
+}
+
+.template-copy-text {
+    margin-left: 2px;
+    vertical-align: middle;
+}

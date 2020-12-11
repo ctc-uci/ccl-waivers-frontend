@@ -1,33 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from './DropZone';
+import './Popup.css';
 
 const Popup = (props) => {
-  const popupStyle = {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '0',
-    margin: 'auto',
-    backgroundColor: 'rgba(0,0,0, 0.5)',
-  };
-
-  const popupBoxStyle = {
-    position: 'absolute',
-    left: '20%',
-    right: '20%',
-    top: '12%',
-    bottom: '12%',
-    margin: 'auto',
-    borderRadius: '10px',
-    background: 'white',
-    padding: '30px',
-    zIndex: 99999,
-  };
-
   const closeUpload = () => {
     props.closePopup();
   };
@@ -49,13 +25,13 @@ const Popup = (props) => {
   return (
     <>
       <a href=" #" onClick={closeUpload}>
-        <div style={popupStyle} />
+        <div className="popup-backdrop" />
       </a>
-      <div style={popupBoxStyle}>
+      <div className="popup-box">
         <h1>
           Upload Template
           {' '}
-          <button onClick={closeUpload} type="button" className="close" style={{ float: 'right' }} aria-label="Close">
+          <button onClick={closeUpload} type="button" className="popup-close-btn" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </h1>
