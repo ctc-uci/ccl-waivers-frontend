@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import tempWaiverImg from '../images/dashboard/waiverImg_placeholder.png';
 import linkIcon from '../images/dashboard/link.png';
-import './File.css';
+import './WaiverFile.css';
 
-const File = (props) => {
+const WaiverFile = (props) => {
   const [isCopied, setCopied] = useState(false);
 
   const {
     fileName, url, date, id, setSelected,
   } = props;
-  const imagePreview = 'https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png';
 
   const handleCopied = () => {
     setCopied(true);
@@ -27,7 +27,7 @@ const File = (props) => {
     <div className="template-file">
       <div className="template-thumbnail">
         <input className="template-checkbox" type="checkbox" onChange={handleCheckbox} />
-        <img className="template-thumbnail-img" src={imagePreview} alt="file preview" />
+        <img className="template-thumbnail-img" src={tempWaiverImg} alt="file preview" />
       </div>
       <div>
         <h3 className="template-title">{fileName}</h3>
@@ -51,7 +51,7 @@ const File = (props) => {
   );
 };
 
-File.propTypes = {
+WaiverFile.propTypes = {
   id: PropTypes.number.isRequired,
   fileName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
@@ -59,4 +59,4 @@ File.propTypes = {
   setSelected: PropTypes.func.isRequired,
 };
 
-export default File;
+export default WaiverFile;

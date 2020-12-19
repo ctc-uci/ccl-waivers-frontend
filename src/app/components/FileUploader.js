@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from './DropZone';
-import './Popup.css';
+import './FileUploader.css';
 
-const Popup = (props) => {
+const FileUploader = (props) => {
   const closeUpload = () => {
     props.closePopup();
   };
@@ -28,12 +28,11 @@ const Popup = (props) => {
         <div className="popup-backdrop" />
       </a>
       <div className="popup-box">
-        <h1>
+        <button onClick={closeUpload} type="button" className="popup-close-btn" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h1 className="title">
           Upload Template
-          {' '}
-          <button onClick={closeUpload} type="button" className="popup-close-btn" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </h1>
         <Dropzone />
       </div>
@@ -41,8 +40,8 @@ const Popup = (props) => {
   );
 };
 
-Popup.propTypes = {
+FileUploader.propTypes = {
   closePopup: PropTypes.func.isRequired,
 };
 
-export default Popup;
+export default FileUploader;

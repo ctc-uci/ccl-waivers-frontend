@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import File from '../../components/File';
+import WaiverFile from '../../components/WaiverFile';
 import cloudUploadIcon from '../../images/dashboard/cloud-upload.png';
 import templates from './templates';
-import Popup from '../../components/Popup';
+import FileUploader from '../../components/FileUploader';
 import './WaiverTemplates.css';
 
 const WaiverTemplates = () => {
@@ -28,7 +28,7 @@ const WaiverTemplates = () => {
 
   const templateList = templates.info.map(
     (temps) => (
-      <File
+      <WaiverFile
         key={temps.id}
         id={temps.id}
         fileName={temps.name}
@@ -58,7 +58,7 @@ const WaiverTemplates = () => {
           Upload template
         </div>
       </button>
-      {showPopup ? <Popup closePopup={togglePopup} /> : null}
+      {showPopup ? <FileUploader closePopup={togglePopup} /> : null}
 
       {templateList}
     </div>

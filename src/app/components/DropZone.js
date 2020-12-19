@@ -18,7 +18,7 @@ function Dropzone() {
     accept: 'application/pdf',
   });
 
-  const className = useMemo(() => {
+  const dropzoneBox = useMemo(() => {
     let base = 'dropzone-zone';
     if (isDragActive) {
       base += ' dropzone-active';
@@ -45,17 +45,19 @@ function Dropzone() {
       {file.size}
       {' '}
       bytes
+      {' '}
     </li>
   ));
 
   return (
     <div className="container">
-      <div className={className} {...getRootProps()}>
+      <div className={dropzoneBox} {...getRootProps()}>
         <input {...getInputProps()} />
-        <span style={{ marginBottom: '16px' }}>Drop file to upload</span>
-        <span style={{ marginBottom: '20px' }}>or</span>
-        <button type="button" onClick={open}>
-          Select file
+        <span className="dropzone-firstLine">Drop file(s) to upload</span>
+        <span className="dropzone-secondLine">or</span>
+        <br />
+        <button type="button" className="fileSelector" onClick={open}>
+          Select File(s)
         </button>
       </div>
       <aside>
