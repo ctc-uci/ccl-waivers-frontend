@@ -1,0 +1,28 @@
+.template-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.template-upload-btn {
+    height: 200px;
+    width: 154px;
+    border: 1px solid black;
+    margin-left: 50px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    text-decoration: none;
+}
+
+.template-upload-icon {
+    margin: auto;
+    margin-bottom: 0;
+    display: block;
+    width: 50px;
+}
+
+.template-upload-text {
+    margin: auto;
+    margin-top: 4px;
+}
