@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import tempWaiverImg from '../images/dashboard/waiverImg_placeholder.png';
 import linkIcon from '../images/dashboard/link.png';
 import './WaiverFile.css';
 
@@ -9,7 +8,7 @@ const WaiverFile = (props) => {
   const [isCopied, setCopied] = useState(false);
 
   const {
-    fileName, url, date, id, setSelected,
+    fileName, url, date, id, setSelected, thumbnailUrl,
   } = props;
 
   const handleCopied = () => {
@@ -27,7 +26,7 @@ const WaiverFile = (props) => {
     <div className="template-file">
       <div className="template-thumbnail">
         <input className="template-checkbox" type="checkbox" onChange={handleCheckbox} />
-        <img className="template-thumbnail-img" src={tempWaiverImg} alt="file preview" />
+        <img className="template-thumbnail-img" src={thumbnailUrl} alt="file preview" />
       </div>
       <div>
         <h3 className="template-title">{fileName}</h3>
@@ -56,6 +55,7 @@ WaiverFile.propTypes = {
   fileName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  thumbnailUrl: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
 };
 
