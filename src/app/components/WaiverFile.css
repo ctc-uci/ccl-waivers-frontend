@@ -25,9 +25,10 @@
 .template-title {
     margin-bottom: 2px;
     margin-top: 4px;
+    overflow-wrap: anywhere;
 }
 
-.template-copy-link {
+.template-copy-link, .template-copy-link:visited {
     color: #00A3FF;
     text-decoration: none;
 }
