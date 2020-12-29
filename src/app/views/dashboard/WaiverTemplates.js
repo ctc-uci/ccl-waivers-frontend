@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import WaiverFile from '../../components/WaiverFile';
-import cloudUploadIcon from '../../images/dashboard/cloud-upload.png';
+// import cloudUploadIcon from '../../images/dashboard/cloud-upload.png';
 import FileUploader from '../../components/FileUploader';
 import './WaiverTemplates.css';
 import Layout from '../../components/Layout';
@@ -59,26 +59,21 @@ const WaiverTemplates = () => {
     <Layout>
       { isLoading ? <div>Loading</div>
         : (
-          <div className="template-list">
+          <>
             <button
               type="button"
               className="template-upload-btn"
               href="#"
               onClick={togglePopup}
             >
-              <img
-                className="template-upload-icon"
-                src={cloudUploadIcon}
-                alt="upload template"
-              />
-              <div className="template-upload-text">
-                Upload template
-              </div>
+              + Upload New Template
             </button>
-            {showPopup ? <FileUploader closePopup={togglePopup} /> : null}
-
-            {templateList}
-          </div>
+            <br />
+            <div className="template-list">
+              {showPopup ? <FileUploader closePopup={togglePopup} /> : null}
+              {templateList}
+            </div>
+          </>
         )}
     </Layout>
   );
