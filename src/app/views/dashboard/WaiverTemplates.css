@@ -1,3 +1,7 @@
+.templates-container {
+    margin-left: 50px
+}
+
 .template-list {
     display: flex;
     flex-wrap: wrap;
@@ -9,14 +13,12 @@
     color: white;
     font-size: 15px;
     cursor: pointer;
-	border-radius:25px;
-	border:1px solid #F7941E;
-	display:inline-block;
-    padding:15px -5px ;
+	border-radius: 25px;
+	border: 1px solid #F7941E;
+	display: inline-block;
     width: 220px;
     height: 40px;
-    margin-left: 50px;
-    margin-top: 47px;
+    margin-top: 20px;
     margin-bottom: 5px;
     outline: none;
 }

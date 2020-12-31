@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import WaiverFile from '../../components/WaiverFile';
-// import cloudUploadIcon from '../../images/dashboard/cloud-upload.png';
 import FileUploader from '../../components/FileUploader';
 import './WaiverTemplates.css';
-import Layout from '../../components/Layout';
 import config from '../../../config';
 
 const WaiverTemplates = () => {
@@ -56,7 +54,7 @@ const WaiverTemplates = () => {
 
   // RENDERING TEMPLATE MANAGER PAGE
   return (
-    <Layout>
+    <div className="templates-container">
       { isLoading ? <div>Loading</div>
         : (
           <>
@@ -75,7 +73,7 @@ const WaiverTemplates = () => {
             </div>
           </>
         )}
-    </Layout>
+    </div>
   );
 };
 

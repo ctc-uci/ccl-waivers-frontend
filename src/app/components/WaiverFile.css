@@ -1,14 +1,17 @@
 .template-file {
     width: 300px;
-    margin-left: 50px;
-    margin-top: 0px;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     flex-direction: row;
 }
 
 .template-thumbnail {
     height: 400px;
     width: 300px;
-    border: 1px solid black;
+    border: 1px solid #ACA6A6;
+    border-radius: 5px;
+    overflow: hidden;
     margin-right: 150px;
     display: flex;
     position: relative;

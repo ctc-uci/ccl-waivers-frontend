@@ -16,7 +16,6 @@
     left: 20%;
     right: 20%;
     top: 12%;
-    bottom: 12%;
     margin: auto;
     border-radius: 10px;
     background: white;
@@ -36,9 +35,9 @@
     outline: none;
 }
 
-.title{
+.title {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 30px;
     margin-top: 30px;
     font-size: 25px;
     font-weight: 550;
