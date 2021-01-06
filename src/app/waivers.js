@@ -12,8 +12,8 @@ const waivers = {
     },
     {
       id: 1,
-      waiver: 'John Doe, Name of the waiver',
-      name: 'Name',
+      waiver: 'Jane Doe, Name of the waiver',
+      name: 'Jane Doe',
       role: 'Participant',
       date: 'MM/DD/YYYY',
       notes: 'glue gun',
@@ -21,8 +21,8 @@ const waivers = {
     },
     {
       id: 2,
-      waiver: 'John Doe, Name of the waiver',
-      name: 'Name',
+      waiver: 'Joshua Liu, Name of the waiver',
+      name: 'Joshua Liu',
       role: 'Participant',
       date: 'MM/DD/YYYY',
       notes: 'none',
@@ -30,8 +30,8 @@ const waivers = {
     },
     {
       id: 3,
-      waiver: 'John Doe, Name of the waiver',
-      name: 'Name',
+      waiver: 'Xuan Vu, Name of the waiver',
+      name: 'Xuan Vu',
       role: 'Participant',
       date: 'MM/DD/YYYY',
       notes: 'glue gun',
@@ -39,8 +39,8 @@ const waivers = {
     },
     {
       id: 4,
-      waiver: 'John Doe, Name of the waiver',
-      name: 'Name',
+      waiver: 'Albert Zhang, Name of the waiver',
+      name: 'Mingjia Wang',
       role: 'Participant',
       date: 'MM/DD/YYYY',
       notes: 'none',
