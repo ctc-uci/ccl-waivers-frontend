@@ -12,11 +12,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <ProtectedRoute exact path="/templates" component={WaiverTemplates} />
-          <ProtectedRoute path="/" component={Admin} />
           <Layout>
-            <Route exact path="/templates" component={WaiverTemplates} />
-            <Route exact path="/" component={Admin} />
+            <ProtectedRoute exact path="/templates" component={WaiverTemplates} />
+            <ProtectedRoute path="/" component={Admin} />
           </Layout>
         </Switch>
       </Router>
