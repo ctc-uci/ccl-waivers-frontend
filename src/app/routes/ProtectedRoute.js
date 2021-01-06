@@ -37,7 +37,7 @@ const ProtectedRoute = ({ component, path }) => {
     return <h1>LOADING...</h1>;
   }
   return isAuthenticated ? (
-    <Route path={path} component={component} />
+    <Route exact path={path} component={component} />
   ) : (
     window.location.replace(signinEndpoint)
   );
