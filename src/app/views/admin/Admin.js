@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Layout from '../../components/Layout';
 import Sidebar from '../../components/Sidebar';
 import waivers from '../../waivers';
 import './Admin.css';
@@ -13,7 +12,7 @@ const Admin = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="sidebar">
         <Sidebar route="Waivers" checked={totalSelected} />
       </div>
@@ -45,7 +44,7 @@ const Admin = () => {
           ))}
         </table>
       </div>
-    </Layout>
+    </>
   );
 };
 
