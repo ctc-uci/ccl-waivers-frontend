@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
+import uploadIcon from '../images/dashboard/file-upload-icon.png';
 import './DropZone.css';
 
 function Dropzone() {
@@ -53,11 +54,12 @@ function Dropzone() {
     <div className="container">
       <div className={dropzoneBox} {...getRootProps()}>
         <input {...getInputProps()} />
-        <span className="dropzone-firstLine">Drop file(s) to upload</span>
+        <img className="upload-icon" src={uploadIcon} alt="upload icon" />
+        <span className="dropzone-firstLine">Drop file to upload</span>
         <span className="dropzone-secondLine">or</span>
         <br />
         <button type="button" className="fileSelector" onClick={open}>
-          Select File(s)
+          Select File
         </button>
       </div>
       <aside>

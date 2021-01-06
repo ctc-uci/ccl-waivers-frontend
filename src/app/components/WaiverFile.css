@@ -1,15 +1,18 @@
 .template-file {
-    width: 154px;
-    margin-left: 50px;
-    margin-top: 40px;
+    width: 300px;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     flex-direction: row;
 }
 
 .template-thumbnail {
-    height: 200px;
-    width: 154px;
-    border: 1px solid black;
-    margin-right: 50px;
+    height: 400px;
+    width: 300px;
+    border: 1px solid #ACA6A6;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 150px;
     display: flex;
     position: relative;
 }
@@ -23,8 +26,9 @@
 }
 
 .template-title {
-    margin-bottom: 2px;
     margin-top: 4px;
+    font-size: 17px;
+    font-weight: bold;
     overflow-wrap: anywhere;
 }
 
@@ -41,4 +45,10 @@
 .template-copy-text {
     margin-left: 2px;
     vertical-align: middle;
+    font-size: 17px;
+}
+.template-created{
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-size: 16px;
 }

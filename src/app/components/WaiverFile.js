@@ -29,12 +29,12 @@ const WaiverFile = (props) => {
         <img className="template-thumbnail-img" src={thumbnailUrl} alt="file preview" />
       </div>
       <div>
-        <h3 className="template-title">{fileName}</h3>
-        <div>
+        <text className="template-title">{fileName}</text>
+        <p className="template-created">
           Created
           {' '}
           {date}
-        </div>
+        </p>
         <CopyToClipboard text={url}>
           <a
             className="template-copy-link"
@@ -42,7 +42,7 @@ const WaiverFile = (props) => {
             onClick={handleCopied}
           >
             <img src={linkIcon} className="template-copy-icon" style={{ display: isCopied ? 'none' : 'inline' }} alt="link" />
-            <span className="template-copy-text">{isCopied ? '\u2713 Copied' : 'Copy Link'}</span>
+            <span className="template-copy-text">{isCopied ? '\u2713 Copied' : 'Copy Shareable Link'}</span>
           </a>
         </CopyToClipboard>
       </div>
