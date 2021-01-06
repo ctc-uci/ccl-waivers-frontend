@@ -10,15 +10,6 @@
 .waiver-table th {
   padding: 10px 0;
 }
-.waiver-search {
-  height: 40px;
-  background-color: lightgrey;
-  width: 300px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
 .waiver-searchbar {
   all: unset;
   color: white;

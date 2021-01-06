@@ -1,0 +1,9 @@
+.waiver-search {
+    height: 40px;
+    background-color: lightgrey;
+    width: 300px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
