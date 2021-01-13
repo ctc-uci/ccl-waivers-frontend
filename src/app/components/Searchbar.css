@@ -1,9 +1,18 @@
 .waiver-search {
-    height: 40px;
-    background-color: lightgrey;
-    width: 300px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+  height: 30px;
+  border: 1px solid gray;
+  width: 300px;
+  margin-top: 25px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+.waiver-searchbar {
+  all: unset;
+  width: 100%;
+}
+.waiver-searchbtn {
+  all: unset;
+  padding: 0 10px;
+  height: 50%;
+}
