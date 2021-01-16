@@ -1,0 +1,75 @@
+.confirmation-modal{
+    background-color: white;
+    max-width: 450px;
+    width: 80vw;
+    margin-bottom: 0vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.confirmation-modal-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0065B2;
+    font-family: 'Roboto';
+    font-size: 2vh;
+    height: 12vh;
+}
+
+.confirmation-modal-text {
+    margin: 0;
+    padding: 40;
+    align-self: center;
+}
+
+.name {
+    justify-content: space-around;
+    display: flex;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.text-entry {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+}
+
+.confirmation-input {
+    max-width: 200px;
+    width: 30vw;
+    height: 25px;
+    margin-top: 5px;
+}
+
+.confirmation-input-email {
+    width: 40vw;
+    height: 25px;
+    max-width: 350px;
+}
+
+.confirmation-modal-submit-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.confirmation-modal-submit {
+    color: white;
+    background: #F7941E;
+    font-family: 'Roboto';
+    font-size: 2vh;
+    color: white;
+    border-color: #0065B2;
+    width: 45vw;
+    max-width: 300px;
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 40px;
+    border-width: 0px;
+}

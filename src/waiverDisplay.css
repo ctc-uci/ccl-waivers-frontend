@@ -1,0 +1,52 @@
+.App {
+    background-color: #e8e7ec;
+}
+.pdf-viewer{
+  height: 100vh;
+}
+.waiver-screen-background{
+    color: #E5E5E5;
+    overflow: visible;
+}
+
+.waiver-screen-title{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #0065B2;
+    font-size: 3vw;
+    font-family: 'Roboto';
+}
+
+.waiver-screen-text{
+    margin:0;
+    padding: 10px
+}
+.waiver-submit-button {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  background: #0065B2;
+  font-family: 'Roboto';
+  font-size: 2vh;
+  color: white;
+  border-color: #0065B2;
+  width: 80vw;
+  max-width: 450px;
+  height: 80px;
+  outline: none;
+  cursor: pointer;
+  
+}
+
+.button-title {
+  width: 450px;
+}
+
+@media screen and (min-width: 500px) {
+  .waiver-screen-title{
+    font-size: 30px;
+}
+}

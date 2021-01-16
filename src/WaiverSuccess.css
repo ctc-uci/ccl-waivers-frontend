@@ -1,0 +1,52 @@
+.waiver-success-home {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.waiver-thank-you {
+    background-color: white;
+    justify-content: center;
+    width: 450px;
+    margin-bottom: 0vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 75vw;
+    max-width: 500px;
+}
+
+.ccl_logo_img {
+    width: 150px;
+}
+
+.ccl_logo_img_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.waiver-thank-you-modal-text {
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    font-family: 'Roboto';
+    color: #0065B2;
+    font-weight: 700
+}
+
+.waiver-thank-you-download{
+    color:#0065B2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.waiver-thank-you-message{
+    text-align: left;
+    font-size: 15px;
+}
+.waiver-thank-you-message-group1{
+    margin: 30px;
+    font-size: 1px;
+}
