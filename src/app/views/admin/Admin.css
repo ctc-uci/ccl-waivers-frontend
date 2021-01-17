@@ -1,22 +1,60 @@
+.admin-dashboard {
+  width: 75%;
+  margin: 0 auto;
+  height: 100%;
+}
+.scrollable-div {
+  border: 1px solid lightgray;
+  overflow-y: overlay;
+  max-height: 80%;
+}
+.scrollable-div::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+.scrollable-div::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
 .waiver-table {
   text-align: left;
   width: 100%;
-  border-spacing: 20px 0;
+  border-collapse: collapse;
 }
 .table-checkbox {
-  margin: 10px 0;
+  transform: scale(1.5);
 }
 .waiver-table td,
 .waiver-table th {
-  padding: 10px 0;
+  padding: 15px;
+  padding-right: 0;
 }
-.waiver-searchbar {
-  all: unset;
-  color: white;
-  width: 100%;
+.waiver-table tr:nth-child(odd) {
+  background-color: #f2f2f2;
 }
-.waiver-searchbtn {
-  all: unset;
-  color: white;
-  padding: 0 10px;
+.waiver-table tr:first-child {
+  background-color: #cacfd3;
+}
+.waiver-form {
+  color: #2685bf;
+}
+.waiver-options {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 25px;
+  margin: 20px 0;
+}
+.waiver-option {
+  outline: none;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+}
+.selected-checkbox {
+  margin-right: 8px;
+}
+.selected-row {
+  background-color: #b6e3f6 !important;
 }

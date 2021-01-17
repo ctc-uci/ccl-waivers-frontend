@@ -14,13 +14,16 @@ const Layout = ({ children }) => (
         <text className="ccl-brand" id="ccl-brand">Child Creativity Lab</text>
       </div>
       <div className="navbar">
-        <NavLink exact to="/" activeClassName="active" className="navbar-links">
+        <NavLink exact to="/" activeClassName="active-link" className="navbar-links">
           <p>Admin Dashboard</p>
         </NavLink>
-        <NavLink exact to="/templates" activeClassName="active" className="navbar-links">
+        <NavLink exact to="/templates" activeClassName="active-link" className="navbar-links">
           <p>Waiver Templates</p>
         </NavLink>
       </div>
+      <NavLink exact to="/logout" className="logout-link">
+        <p>Logout</p>
+      </NavLink>
     </div>
     <div className="content">
       {children}
