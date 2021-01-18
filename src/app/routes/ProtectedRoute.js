@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config';
@@ -21,7 +20,7 @@ const verifyToken = async () => {
   return true;
 };
 
-const ProtectedRoute = ({ component, path }) => {
+const ProtectedRoute = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,15 +36,11 @@ const ProtectedRoute = ({ component, path }) => {
     return <h1>LOADING...</h1>;
   }
   return isAuthenticated ? (
-    <Route exact path={path} component={component} />
+    /* eslint-disable react/jsx-props-no-spreading */
+    <Route {...props} />
   ) : (
     window.location.replace(signinEndpoint)
   );
-};
-
-ProtectedRoute.propTypes = {
-  component: PropTypes.element.isRequired,
-  path: PropTypes.string.isRequired,
 };
 
 export default ProtectedRoute;
