@@ -15,8 +15,8 @@ function App() {
           <Route path="/Waiverdisplay" exact component={waiverDisplay} />
           <Route path="/Waiversuccess" exact component={WaiverSuccess} />
           <Layout>
-            <ProtectedRoute exact path="/templates" component={WaiverTemplates} />
-            <ProtectedRoute path="/" component={Admin} />
+            <ProtectedRoute exact path="/" component={Admin} />
+            <WaiverTemplates path="/templates" />
           </Layout>
         </Switch>
       </Router>

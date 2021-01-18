@@ -29,7 +29,7 @@ const WaiverFile = (props) => {
         <img className="template-thumbnail-img" src={thumbnailUrl} alt="file preview" />
       </div>
       <div>
-        <text className="template-title">{fileName}</text>
+        <span className="template-title">{fileName}</span>
         <p className="template-created">
           Created
           {' '}
