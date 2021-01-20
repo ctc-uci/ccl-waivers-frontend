@@ -63,3 +63,16 @@
     width: 100px;
     height: 100px;
 }
+
+.uploadButton{
+    background-color: #F7941E;
+    padding: 10px;
+    width: 200px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 530;
+    border: none;
+    cursor: pointer;
+    color: white;
+    outline: none;
+}

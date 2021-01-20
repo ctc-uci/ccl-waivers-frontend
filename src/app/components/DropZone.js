@@ -1,10 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import uploadIcon from '../images/dashboard/file-upload-icon.png';
 import './DropZone.css';
+import config from '../../config';
 
-function Dropzone() {
+function Dropzone({ onClose }) {
   const {
     getRootProps,
     getInputProps,
@@ -50,6 +53,26 @@ function Dropzone() {
     </li>
   ));
 
+  const uploadTemplates = () => {
+    const upload = async (file) => {
+      try {
+        await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
+      } catch (error) {
+        if (error.response.status === 500) {
+          console.error(`Error: ${error}`);
+          return false;
+        }
+      }
+      return null;
+    };
+    for (let i = 0; i < acceptedFiles.length; i += 1) {
+      const formData = new FormData();
+      formData.append('file', acceptedFiles[i]);
+      upload(formData);
+    }
+    onClose();
+  };
+
   return (
     <div className="container">
       <div className={dropzoneBox} {...getRootProps()}>
@@ -66,10 +89,15 @@ function Dropzone() {
         <h4>Files</h4>
         <ul>{files}</ul>
       </aside>
+      <button type="button" className="uploadButton" onClick={uploadTemplates}>Upload</button>
     </div>
   );
 }
 
   <Dropzone />;
+
+Dropzone.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default Dropzone;
