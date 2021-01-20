@@ -10,6 +10,7 @@ const verifyToken = async () => {
   try {
     await axios.get(verifyEndpoint, { withCredentials: true });
   } catch (error) {
+    console.error(`Error: ${error}`);
     if (error.response.status === 401) {
       console.error(`Error: ${error}`);
       return false;

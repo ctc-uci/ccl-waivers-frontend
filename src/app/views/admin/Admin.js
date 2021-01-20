@@ -1,30 +1,50 @@
-import React, { useState } from 'react';
-import waivers from '../../waivers';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Searchbar from '../../components/Searchbar';
 import './Admin.css';
+import config from '../../../config';
 
 const Admin = () => {
-  const waiverList = waivers.info;
-  const [totalSelected, setTotalSelected] = useState(0);
-  const [waiverListFiltered, setWaiverListFiltered] = useState(waiverList);
+  const [waiverList, setWaiverList] = useState([]);
+  const [waiverListFiltered, setWaiverListFiltered] = useState([]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [filesSelected, setFilesSelected] = useState([]);
+
+  useEffect(() => {
+    async function getWaivers() {
+      const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+      setWaiverList(res.data);
+      setWaiverListFiltered(res.data);
+      setIsLoading(false);
+    }
+    getWaivers();
+  }, []);
+
+  const getDate = (uploadDate) => {
+    const dateObj = new Date(uploadDate);
+    return `${dateObj.toLocaleDateString(undefined, { month: 'short' })}
+            ${dateObj.toLocaleDateString(undefined, { day: '2-digit' })},
+            ${dateObj.toLocaleDateString(undefined, { year: 'numeric' })}`;
+  };
 
   const selectWaiver = (event) => {
     const tablerow = event.target.parentNode.parentNode;
+    const file = tablerow.id;
     if (event.target.checked) {
-      setTotalSelected(totalSelected + 1);
       tablerow.classList.add('selected-row');
+      setFilesSelected([...filesSelected, file]);
     } else {
-      setTotalSelected(totalSelected - 1);
       tablerow.classList.remove('selected-row');
+      const files = filesSelected.filter((f) => f !== file);
+      setFilesSelected([files]);
     }
   };
 
   const filterBy = (currWaiver, currSearchTerm) => {
     const searchTermLowerCase = currSearchTerm.toLowerCase();
-    return (
-      currWaiver.name.toLowerCase().includes(searchTermLowerCase)
-      || currWaiver.waiver.toLowerCase().includes(searchTermLowerCase));
+    if (currSearchTerm !== '') return (currWaiver.fileName.toLowerCase().includes(searchTermLowerCase));
+    return (currWaiver);
   };
 
   const updateInput = async (searchTerm) => {
@@ -35,12 +55,15 @@ const Admin = () => {
 
   const selectAllWaivers = () => {
     const checkboxes = document.getElementsByName('waivers');
+    const files = [];
     for (let i = 0; i < checkboxes.length; i += 1) {
       checkboxes[i].checked = true;
       const tablerow = checkboxes[i].parentNode.parentNode;
+      const file = tablerow.id;
+      files.push(file);
       tablerow.classList.add('selected-row');
     }
-    setTotalSelected(checkboxes.length);
+    setFilesSelected(files);
   };
 
   const unselectAllWaivers = () => {
@@ -50,15 +73,46 @@ const Admin = () => {
       const tablerow = checkboxes[i].parentNode.parentNode;
       tablerow.classList.remove('selected-row');
     }
-    setTotalSelected(0);
+    setFilesSelected([]);
   };
 
   const downloadWaivers = () => {
-    console.log('download');
+    const download = async (id) => {
+      try {
+        const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+        const link = res.data[0].temporaryDownloadLink;
+        const linkElem = document.createElement('a');
+        linkElem.href = link;
+        document.body.appendChild(linkElem);
+        linkElem.click();
+      } catch (error) {
+        if (error.response.status === 500) {
+          console.error(`Error: ${error}`);
+          return false;
+        }
+      }
+      return null;
+    };
+    download(filesSelected[0]);
   };
 
   const deleteWaivers = () => {
-    console.log('delete');
+    console.log(filesSelected);
+    async function deleteWaiver(id) {
+      try {
+        await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+      } catch (error) {
+        if (error.response.status === 500) {
+          console.error(`Error: ${error}`);
+          return false;
+        }
+      }
+      return null;
+    }
+    for (let i = 0; i < filesSelected.length; i += 1) {
+      deleteWaiver(filesSelected[i]);
+    }
+    setFilesSelected([]);
   };
 
   return (
@@ -66,8 +120,8 @@ const Admin = () => {
       <Searchbar keyword={input} setKeyword={updateInput} />
       <div className="waiver-options">
         <span>
-          {totalSelected === 0 ? null : <input type="checkbox" className="selected-checkbox" defaultChecked onClick={unselectAllWaivers} />}
-          {totalSelected}
+          {filesSelected.length === 0 ? null : <input type="checkbox" className="selected-checkbox" defaultChecked onClick={unselectAllWaivers} />}
+          {filesSelected.length}
           {' '}
           Selected
         </span>
@@ -85,13 +139,13 @@ const Admin = () => {
             <th>Date Signed</th>
             <th>Notes</th>
           </tr>
-          {waiverListFiltered.map((waiver) => (
-            <tr id={waiver.id} key={waiver}>
+          {isLoading ? <div>Loading...</div> : waiverListFiltered.map((waiver) => (
+            <tr id={waiver.id} key={waiver.id}>
               <td><input className="table-checkbox" name="waivers" type="checkbox" onChange={selectWaiver} /></td>
               <td>{waiver.name}</td>
-              <td className="waiver-form">{waiver.waiver}</td>
+              <td className="waiver-form">{waiver.fileName}</td>
               <td>{waiver.role}</td>
-              <td>{waiver.date}</td>
+              <td>{getDate(waiver.createdDateTime)}</td>
               <td>{waiver.notes}</td>
             </tr>
           ))}

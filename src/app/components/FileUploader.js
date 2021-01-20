@@ -34,7 +34,7 @@ const FileUploader = (props) => {
         <h1 className="title">
           Upload Template
         </h1>
-        <Dropzone />
+        <Dropzone onClose={closeUpload} />
       </div>
     </>
   );
