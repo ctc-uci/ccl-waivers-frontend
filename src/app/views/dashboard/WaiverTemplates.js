@@ -28,7 +28,7 @@ const WaiverTemplates = (props) => {
       setIsLoading(false);
     }
     getTemplates();
-  }, []);
+  }, [templates]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);

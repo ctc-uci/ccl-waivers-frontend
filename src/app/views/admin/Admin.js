@@ -19,7 +19,7 @@ const Admin = () => {
       setIsLoading(false);
     }
     getWaivers();
-  }, []);
+  }, [filesSelected]);
 
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
@@ -37,7 +37,7 @@ const Admin = () => {
     } else {
       tablerow.classList.remove('selected-row');
       const files = filesSelected.filter((f) => f !== file);
-      setFilesSelected([files]);
+      setFilesSelected(files);
     }
   };
 
@@ -78,41 +78,28 @@ const Admin = () => {
 
   const downloadWaivers = () => {
     const download = async (id) => {
-      try {
-        const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
-        const link = res.data[0].temporaryDownloadLink;
-        const linkElem = document.createElement('a');
-        linkElem.href = link;
-        document.body.appendChild(linkElem);
-        linkElem.click();
-      } catch (error) {
-        if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
-          return false;
-        }
-      }
-      return null;
+      const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+      const link = res.data[0].temporaryDownloadLink;
+      const linkElem = document.createElement('a');
+      linkElem.href = link;
+      document.body.appendChild(linkElem);
+      linkElem.click();
     };
-    download(filesSelected[0]);
+    if (filesSelected.length !== 0) {
+      download(filesSelected[0]);
+    }
   };
 
   const deleteWaivers = () => {
-    console.log(filesSelected);
     async function deleteWaiver(id) {
-      try {
-        await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
-      } catch (error) {
-        if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
-          return false;
-        }
+      await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+    }
+    if (filesSelected.length !== 0) {
+      for (let i = 0; i < filesSelected.length; i += 1) {
+        deleteWaiver(filesSelected[i]);
       }
-      return null;
+      setFilesSelected([]);
     }
-    for (let i = 0; i < filesSelected.length; i += 1) {
-      deleteWaiver(filesSelected[i]);
-    }
-    setFilesSelected([]);
   };
 
   return (
