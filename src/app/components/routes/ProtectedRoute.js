@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import config from '../../config';
+import Spinner from '../loadingSpinner/spinner';
+import config from '../../../config';
 
 const verifyEndpoint = `${config.apiUrl}/auth/verify`;
 const signinEndpoint = `${config.apiUrl}/auth/signin`;
@@ -10,13 +11,13 @@ const verifyToken = async () => {
   try {
     await axios.get(verifyEndpoint, { withCredentials: true });
   } catch (error) {
-    console.error(`Error: ${error}`);
+    console.error(error);
     if (error.response.status === 401) {
-      console.error(`Error: ${error}`);
+      console.error(error);
       return false;
     }
     // TODO: redirect to error page
-    console.log('It broke');
+    console.error(error);
   }
   return true;
 };
@@ -34,14 +35,14 @@ const ProtectedRoute = (props) => {
   }, []);
 
   if (isLoading) {
-    return <h1>LOADING...</h1>;
+    return <Spinner />;
   }
-  return isAuthenticated ? (
-    /* eslint-disable react/jsx-props-no-spreading */
-    <Route {...props} />
-  ) : (
-    window.location.replace(signinEndpoint)
-  );
+  if (isAuthenticated) {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <Route {...props} />;
+  }
+  window.location.replace(signinEndpoint);
+  return <Spinner />;
 };
 
 export default ProtectedRoute;

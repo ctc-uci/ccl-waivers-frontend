@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import ProtectedRoute from '../../routes/ProtectedRoute';
-import WaiverFile from '../../components/WaiverFile';
-import FileUploader from '../../components/FileUploader';
-import './WaiverTemplates.css';
+import ProtectedRoute from '../../components/routes/ProtectedRoute';
+import WaiverFile from '../../components/waiverTemplates/waiverfile/WaiverFile';
+import FileUploader from '../../components/waiverTemplates/fileUploader/FileUploader';
 import config from '../../../config';
+import Spinner from '../../components/loadingSpinner/spinner';
+import './WaiverTemplates.css';
 
 const WaiverTemplates = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -21,12 +22,13 @@ const WaiverTemplates = (props) => {
             ${dateObj.toLocaleDateString(undefined, { year: 'numeric' })}`;
   };
 
+  const getTemplates = async () => {
+    const res = await axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
+    setTemplates(res.data);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    async function getTemplates() {
-      const res = await axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
-      setTemplates(res.data);
-      setIsLoading(false);
-    }
     getTemplates();
   });
 
@@ -56,11 +58,10 @@ const WaiverTemplates = (props) => {
     ),
   ), [templates]);
 
-  // RENDERING TEMPLATE MANAGER PAGE
   return (
     <ProtectedRoute exact path={path}>
       <div className="templates-container">
-        { isLoading ? <div>Loading</div>
+        { isLoading ? <Spinner />
           : (
             <>
               <button
@@ -69,7 +70,7 @@ const WaiverTemplates = (props) => {
                 href="#"
                 onClick={togglePopup}
               >
-                + Upload New Template
+                Upload New Template
               </button>
               <br />
               <div className="template-list">

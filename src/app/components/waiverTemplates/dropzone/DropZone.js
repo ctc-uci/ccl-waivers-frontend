@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import uploadIcon from '../images/dashboard/file-upload-icon.png';
+import uploadIcon from '../../../images/dashboard/file-upload-icon.png';
 import './DropZone.css';
-import config from '../../config';
+import config from '../../../../config';
 
 function Dropzone({ onClose }) {
   const {

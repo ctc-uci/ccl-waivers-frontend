@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import linkIcon from '../images/dashboard/link.png';
+import linkIcon from '../../../images/dashboard/link.png';
 import './WaiverFile.css';
 
 const WaiverFile = (props) => {

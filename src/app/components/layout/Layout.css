@@ -19,7 +19,7 @@
 }
 .content {
   padding: 20px;
-  height: 85vh;
+  height: calc(100vh - 125px);
 }
 .header {
   position: relative;

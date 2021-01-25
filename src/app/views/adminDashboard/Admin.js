@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Searchbar from '../../components/Searchbar';
+import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
 import './Admin.css';
 import config from '../../../config';
+import Spinner from '../../components/loadingSpinner/spinner';
 
 const Admin = () => {
   const [waiverList, setWaiverList] = useState([]);
@@ -11,13 +12,14 @@ const Admin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [filesSelected, setFilesSelected] = useState([]);
 
+  const getWaivers = async () => {
+    const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+    setWaiverList(res.data);
+    setWaiverListFiltered(res.data);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    async function getWaivers() {
-      const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
-      setWaiverList(res.data);
-      setWaiverListFiltered(res.data);
-      setIsLoading(false);
-    }
     getWaivers();
   }, []);
 
@@ -139,7 +141,7 @@ const Admin = () => {
             <th>Date Signed</th>
             <th>Notes</th>
           </tr>
-          {isLoading ? <div>Loading...</div> : waiverListFiltered.map((waiver) => (
+          {isLoading ? <Spinner className="sk-center" /> : waiverListFiltered.map((waiver) => (
             <tr id={waiver.id} key={waiver.id}>
               <td><input className="table-checkbox" name="waivers" type="checkbox" onChange={selectWaiver} /></td>
               <td>{waiver.name}</td>

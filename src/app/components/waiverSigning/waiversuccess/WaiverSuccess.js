@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './WaiverSuccess.css';
-import cclImage from './src_app_images_dashboard_ccl-logo.png';
+import cclImage from '../../../images/ccl-logo.png';
 
 function WaiverSuccess() {
   const pdf = window.history.state.state.pdfRef;
