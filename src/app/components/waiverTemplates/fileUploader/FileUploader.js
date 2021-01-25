@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Dropzone from './DropZone';
+import Dropzone from '../dropzone/DropZone';
 import './FileUploader.css';
 
 const FileUploader = (props) => {

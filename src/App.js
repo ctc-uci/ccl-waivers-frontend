@@ -1,24 +1,25 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import WaiverSuccess from './WaiverSuccess';
-import waiverDisplay from './WaiverDisplay';
-import Admin from './app/views/admin/Admin';
-import WaiverTemplates from './app/views/dashboard/WaiverTemplates';
-import ProtectedRoute from './app/routes/ProtectedRoute';
-import Layout from './app/components/Layout';
+import WaiverSuccess from './app/components/waiverSigning/waiversuccess/WaiverSuccess';
+import waiverDisplay from './app/components/waiverSigning/waiverdisplay/WaiverDisplay';
+import Admin from './app/views/adminDashboard/Admin';
+import WaiverTemplates from './app/views/templates/WaiverTemplates';
+import ProtectedRoute from './app/components/routes/ProtectedRoute';
+import Layout from './app/components/layout/Layout';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/Waiverdisplay" exact component={waiverDisplay} />
-          <Route path="/Waiversuccess" exact component={WaiverSuccess} />
-          <Layout>
+        <Layout />
+        <div className="content">
+          <Switch>
+            <Route path="/waiverdisplay" exact component={waiverDisplay} />
+            <Route path="/waiversuccess" exact component={WaiverSuccess} />
             <ProtectedRoute exact path="/" component={Admin} />
-            <WaiverTemplates path="/templates" />
-          </Layout>
-        </Switch>
+            <WaiverTemplates exact path="/templates" />
+          </Switch>
+        </div>
       </Router>
     </div>
   );

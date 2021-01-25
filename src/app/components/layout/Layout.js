@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './Layout.css';
 
-const Layout = ({ children }) => (
+const Layout = () => (
   <div>
     <div className="header">
       <div className="navbar">
@@ -18,14 +17,7 @@ const Layout = ({ children }) => (
         <p>Logout</p>
       </NavLink>
     </div>
-    <div className="content">
-      {children}
-    </div>
   </div>
 );
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Layout;

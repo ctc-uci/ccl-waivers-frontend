@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './waiverDisplay.css';
-import ConfirmationModal from './components/ConfirmationModal';
+import ConfirmationModal from '../confirmationModal/ConfirmationModal';
 
 function WaiverDisplay() {
   const [pdfService, setPdfService] = useState(null);
