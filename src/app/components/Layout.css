@@ -19,7 +19,6 @@
 }
 .content {
   padding: 20px;
-  height: 85vh;
 }
 .header {
   position: relative;
@@ -45,7 +44,9 @@
   height: 50%;
   color: white !important;
 }
-.navbar-links {
+.navbar-links:link,
+.navbar-links:visited {
+  color: white;
   padding: 0 20px;
   font-size: 18px;
   font-weight: 500;

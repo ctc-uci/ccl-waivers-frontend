@@ -119,7 +119,7 @@ const Admin = () => {
     <div className="admin-dashboard">
       <Searchbar keyword={input} setKeyword={updateInput} />
       <div className="waiver-options">
-        <span>
+        <span className="selected-text">
           {filesSelected.length === 0 ? null : <input type="checkbox" className="selected-checkbox" defaultChecked onClick={unselectAllWaivers} />}
           {filesSelected.length}
           {' '}
