@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Searchbar.css';
 
 const Searchbar = ({ keyword, setKeyword }) => (
-  <form className="waiver-search">
+  <form className="waiver-search" onSubmit={(e) => e.preventDefault()}>
     <img src="icons/search-icon.png" alt="Search button" height="15px" className="waiver-searchbtn" />
     <input
       className="waiver-searchbar"

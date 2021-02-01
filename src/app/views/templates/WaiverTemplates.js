@@ -30,7 +30,7 @@ const WaiverTemplates = (props) => {
 
   useEffect(() => {
     getTemplates();
-  });
+  }, [templates]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);

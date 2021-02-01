@@ -55,22 +55,16 @@ function Dropzone({ onClose }) {
 
   const uploadTemplates = () => {
     const upload = async (file) => {
-      try {
-        await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
-      } catch (error) {
-        if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
-          return false;
-        }
-      }
-      return null;
+      await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
     };
-    for (let i = 0; i < acceptedFiles.length; i += 1) {
-      const formData = new FormData();
-      formData.append('file', acceptedFiles[i]);
-      upload(formData);
+    if (acceptedFiles.length !== 0) {
+      for (let i = 0; i < acceptedFiles.length; i += 1) {
+        const formData = new FormData();
+        formData.append('file', acceptedFiles[i]);
+        upload(formData);
+      }
+      onClose();
     }
-    onClose();
   };
 
   return (

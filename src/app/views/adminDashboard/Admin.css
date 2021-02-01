@@ -51,6 +51,20 @@
   border: none;
   background-color: transparent;
   font-size: 1rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.waiver-option:hover {
+  background-color: #d9dee0;
+}
+.selected-text {
+  outline: none;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 5px 10px;
 }
 .selected-checkbox {
   margin-right: 8px;
