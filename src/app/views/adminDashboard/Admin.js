@@ -104,29 +104,37 @@ const Admin = () => {
     }
   };
 
+  const editWaiver = () => {
+    console.log('edit waiver');
+    // show edit waiver component
+    // that component should call patch request
+    // change table so that super long notes are partially hidden
+    // get icon for edit button
+  };
+
   return (
     <div className="admin-dashboard">
       <Searchbar keyword={input} setKeyword={updateInput} />
       <div className="waiver-options">
         <span className="selected-text">
-          {filesSelected.length === 0 ? null : <input type="checkbox" className="selected-checkbox" defaultChecked onClick={unselectAllWaivers} />}
           {filesSelected.length}
           {' '}
           Selected
         </span>
-        <button type="button" className="waiver-option" onClick={selectAllWaivers}>Select All</button>
+        {filesSelected.length === 0 ? (<button type="button" className="waiver-option" onClick={selectAllWaivers}>Select All</button>) : (<button type="button" className="waiver-option" onClick={unselectAllWaivers}>Deselect All</button>)}
         <button type="button" className="waiver-option" onClick={downloadWaivers}>Download</button>
         <button type="button" className="waiver-option" onClick={deleteWaivers}>Delete</button>
       </div>
       <div className="scrollable-div">
         <table className="waiver-table">
           <tr>
-            <span />
+            <th>&nbsp;</th>
             <th>Name</th>
             <th>Form</th>
             <th>Role</th>
             <th>Date Signed</th>
             <th>Notes</th>
+            <th>&nbsp;</th>
           </tr>
           {isLoading ? <Spinner className="sk-center" /> : waiverListFiltered.map((waiver) => (
             <tr id={waiver.id} key={waiver.id}>
@@ -136,6 +144,7 @@ const Admin = () => {
               <td>{waiver.role}</td>
               <td>{getDate(waiver.createdDateTime)}</td>
               <td>{waiver.notes}</td>
+              <td><button type="button" onClick={editWaiver}>Edit</button></td>
             </tr>
           ))}
         </table>
