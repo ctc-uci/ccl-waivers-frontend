@@ -5,7 +5,7 @@ import './Admin.css';
 import config from '../../../config';
 import Spinner from '../../components/loadingSpinner/spinner';
 import EditWaiver from '../../components/adminDashboard/editwaiver/EditWaiver';
-import SortFeature from '../../components/adminDashboard/searchbar/SortFeature';
+import SortFeature from '../../components/adminDashboard/sortfeature/SortFeature';
 
 const Admin = () => {
   const [waiverList, setWaiverList] = useState(JSON.parse(localStorage.getItem('waivers')) || []);
