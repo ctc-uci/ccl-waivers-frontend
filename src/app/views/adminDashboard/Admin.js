@@ -4,6 +4,7 @@ import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
 import './Admin.css';
 import config from '../../../config';
 import Spinner from '../../components/loadingSpinner/spinner';
+import SortFeature from '../../components/adminDashboard/searchbar/SortFeature';
 
 const Admin = () => {
   const [waiverList, setWaiverList] = useState([]);
@@ -124,6 +125,7 @@ const Admin = () => {
         {filesSelected.length === 0 ? (<button type="button" className="waiver-option" onClick={selectAllWaivers}>Select All</button>) : (<button type="button" className="waiver-option" onClick={unselectAllWaivers}>Deselect All</button>)}
         <button type="button" className="waiver-option" onClick={downloadWaivers}>Download</button>
         <button type="button" className="waiver-option" onClick={deleteWaivers}>Delete</button>
+        <SortFeature />
       </div>
       <div className="scrollable-div">
         <table className="waiver-table">

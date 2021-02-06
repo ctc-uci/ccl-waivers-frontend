@@ -1,0 +1,38 @@
+.sort-dropdown {
+    position: relative;
+    border-radius: 5px;
+    float:right;
+    margin-left:auto;
+  }
+  .sort-button {
+    outline: none;
+    border: none;
+    background-color: #0065B2;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 15px 5px 8px;
+    border-radius: 3px;
+    text-align: left;
+    color: white;
+    width: 159pt;
+    box-shadow: 0 0 0 1pt #0065B2;
+  }
+  .dropdown-content {
+    box-shadow: 0 0 0 1pt #0065B2;
+    background-color: white;
+    font-size: 1rem;
+    padding: 0px 8px;
+    color: #0065B2;
+    position: absolute;
+    z-index: 10;
+    display: none;
+    width: 147pt;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .dropdown-content p{
+    display: block;
+  }
+  .show {
+    display: block;
+  }
