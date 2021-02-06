@@ -4,6 +4,7 @@ import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
 import './Admin.css';
 import config from '../../../config';
 import Spinner from '../../components/loadingSpinner/spinner';
+import EditWaiver from '../../components/adminDashboard/editwaiver/EditWaiver';
 import SortFeature from '../../components/adminDashboard/searchbar/SortFeature';
 
 const Admin = () => {
@@ -12,6 +13,8 @@ const Admin = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [filesSelected, setFilesSelected] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [editID, setEditID] = useState(null);
 
   const getWaivers = async () => {
     const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
@@ -108,8 +111,15 @@ const Admin = () => {
       }
       setFilesSelected([]);
     }
-    getWaivers();
-    setFilesSelected([]);
+  };
+
+  const editWaiver = (e) => {
+    setShowPopup(true);
+    setEditID(e.target.parentNode.parentNode.id);
+  };
+
+  const onClose = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -150,6 +160,7 @@ const Admin = () => {
           ))}
         </table>
       </div>
+      {showPopup ? <EditWaiver id={editID} closePopup={onClose} /> : null}
     </div>
   );
 };
