@@ -7,22 +7,27 @@ import Spinner from '../../components/loadingSpinner/spinner';
 import SortFeature from '../../components/adminDashboard/searchbar/SortFeature';
 
 const Admin = () => {
-  const [waiverList, setWaiverList] = useState([]);
-  const [waiverListFiltered, setWaiverListFiltered] = useState([]);
+  const [waiverList, setWaiverList] = useState(JSON.parse(localStorage.getItem('waivers')) || []);
+  const [waiverListFiltered, setWaiverListFiltered] = useState(JSON.parse(localStorage.getItem('waivers')) || []);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [filesSelected, setFilesSelected] = useState([]);
 
   const getWaivers = async () => {
     const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+    localStorage.setItem('waivers', JSON.stringify(res.data));
     setWaiverList(res.data);
     setWaiverListFiltered(res.data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getWaivers();
-  }, [filesSelected]);
+    if (waiverList === []) {
+      getWaivers();
+    }
+    setIsLoading(false);
+    return () => (true);
+  }, [waiverList]);
 
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
@@ -103,14 +108,8 @@ const Admin = () => {
       }
       setFilesSelected([]);
     }
-  };
-
-  const editWaiver = () => {
-    console.log('edit waiver');
-    // show edit waiver component
-    // that component should call patch request
-    // change table so that super long notes are partially hidden
-    // get icon for edit button
+    getWaivers();
+    setFilesSelected([]);
   };
 
   return (
