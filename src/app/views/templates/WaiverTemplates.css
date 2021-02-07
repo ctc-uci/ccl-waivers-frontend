@@ -7,20 +7,32 @@
     flex-wrap: wrap;
 }
 
-.template-upload-btn {
+.orange-btn {
     font-weight: bold;
     background-color: #F7941E;
     color: white;
-    font-size: 15px;
     cursor: pointer;
 	border-radius: 25px;
-	border: 1px solid #F7941E;
+    /* border: 1px solid #F7941E; */
+    border: none;
 	display: inline-block;
+    outline: none;
+}
+.disabled-btn {
+    opacity: 20%;
+    cursor: auto;
+}
+
+.orange-btn:hover {
+    background-color: #ec901e;
+}
+
+.template-upload-btn {
+    font-size: 15px;
     width: 220px;
     height: 40px;
     margin-top: 20px;
     margin-bottom: 5px;
-    outline: none;
 }
 
 .template-upload-icon {

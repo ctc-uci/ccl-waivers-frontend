@@ -66,7 +66,7 @@ const WaiverTemplates = (props) => {
             <>
               <button
                 type="button"
-                className="template-upload-btn"
+                className="orange-btn template-upload-btn"
                 href="#"
                 onClick={togglePopup}
               >

@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import uploadIcon from '../../../images/dashboard/file-upload-icon.png';
 import './DropZone.css';
 import config from '../../../../config';
 
@@ -40,19 +39,6 @@ function Dropzone({ onClose }) {
     isDragAccept,
   ]);
 
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path}
-      {' '}
-      -
-      {' '}
-      {file.size}
-      {' '}
-      bytes
-      {' '}
-    </li>
-  ));
-
   const uploadTemplates = () => {
     const upload = async (file) => {
       await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
@@ -67,23 +53,52 @@ function Dropzone({ onClose }) {
     }
   };
 
+  const deleteUploadedTemplate = (event) => {
+    const index = acceptedFiles.findIndex((file) => file.name
+    === event.target.parentNode.parentNode.id);
+    acceptedFiles.splice(index, 1);
+  };
+
   return (
     <div className="container">
       <div className={dropzoneBox} {...getRootProps()}>
         <input {...getInputProps()} />
-        <img className="upload-icon" src={uploadIcon} alt="upload icon" />
-        <span className="dropzone-firstLine">Drop file to upload</span>
-        <span className="dropzone-secondLine">or</span>
-        <br />
-        <button type="button" className="fileSelector" onClick={open}>
-          Select File
-        </button>
+        <span className="dropzone-firstLine">
+          Add files via Drag and Drop or
+          <button type="button" className="browse-btn" onClick={open}>
+            Browse Files
+          </button>
+        </span>
+
+        <div className="scrollable-div">
+          <table className="upload-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            {acceptedFiles.map((file) => (
+              <tr id={file.path} key={file.path}>
+                <td>{file.path}</td>
+                <td>
+                  {file.size / 1000}
+                  {' '}
+                  KB
+                </td>
+                <td className="progress-bar">Progress Bar</td>
+                <td>
+                  <button type="button" className="remove-file-btn" aria-label="Remove" onClick={deleteUploadedTemplate}><span aria-hidden="true">&times;</span></button>
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+
+        <button type="button" className="orange-btn template-upload-btn" onClick={uploadTemplates}>Upload All</button>
       </div>
-      <aside>
-        <h4>Files</h4>
-        <ul>{files}</ul>
-      </aside>
-      <button type="button" className="uploadButton" onClick={uploadTemplates}>Upload</button>
+
     </div>
   );
 }

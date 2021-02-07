@@ -138,9 +138,34 @@ const Admin = () => {
           {' '}
           Selected
         </span>
-        {filesSelected.length === 0 ? (<button type="button" className="waiver-option" onClick={selectAllWaivers}>Select All</button>) : (<button type="button" className="waiver-option" onClick={unselectAllWaivers}>Deselect All</button>)}
-        <button type="button" className="waiver-option" onClick={downloadWaivers}>Download</button>
-        <button type="button" className="waiver-option" onClick={deleteWaivers}>Delete</button>
+        {filesSelected.length === 0 ? (
+          <button type="button" className="orange-btn waiver-option" onClick={selectAllWaivers}>Select All</button>
+        ) : (<button type="button" className="orange-btn waiver-option" onClick={unselectAllWaivers}>Deselect All</button>)}
+
+        {filesSelected.length === 0 || waiverList.length === 0 ? (
+          <button type="button" className="orange-btn waiver-option disabled-btn">
+            <img src="icons/trash-can-icon.png" alt="Trash Can Icon" height="15px" />
+            Download
+          </button>
+
+        ) : (
+          <button type="button" className="orange-btn waiver-option" onClick={downloadWaivers}>
+            <img src="icons/download-icon.png" alt="Download Icon" height="15px" />
+            Download
+          </button>
+        )}
+
+        {filesSelected.length === 0 || waiverList.length === 0 ? (
+          <button type="button" className="orange-btn waiver-option disabled-btn">
+            <img src="icons/trash-can-icon.png" alt="Trash Can Icon" height="15px" />
+            Delete
+          </button>
+        ) : (
+          <button type="button" className="orange-btn waiver-option" onClick={deleteWaivers}>
+            <img src="icons/trash-can-icon.png" alt="Trash Can Icon" height="15px" />
+            Delete
+          </button>
+        )}
         <SortFeature />
       </div>
       <div className="scrollable-div">
@@ -162,7 +187,11 @@ const Admin = () => {
               <td>{waiver.role}</td>
               <td>{getDate(waiver.createdDateTime)}</td>
               <td>{waiver.notes}</td>
-              <td><button type="button" onClick={editWaiver}>Edit</button></td>
+              <td>
+                <button type="button" className="waiver-edit-btn" onClick={editWaiver}>
+                  <img src="icons/edit-icon.png" alt="Edit Icon" height="15px" />
+                </button>
+              </td>
             </tr>
           ))}
         </table>
