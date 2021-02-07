@@ -17,7 +17,6 @@ const Admin = () => {
   const [editID, setEditID] = useState(null);
 
   const getWaivers = async () => {
-    // setIsLoading(true);
     const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
     localStorage.setItem('waivers', JSON.stringify(res.data));
     setWaiverList(res.data);
@@ -115,6 +114,7 @@ const Admin = () => {
       for (let i = 0; i < filesSelected.length; i += 1) {
         deleteWaiver(filesSelected[i]);
       }
+      setIsLoading(true);
       getWaivers();
       setFilesSelected([]);
     }
