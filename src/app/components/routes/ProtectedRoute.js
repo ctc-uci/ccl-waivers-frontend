@@ -11,13 +11,10 @@ const verifyToken = async () => {
   try {
     await axios.get(verifyEndpoint, { withCredentials: true });
   } catch (error) {
-    console.error(error);
     if (error.response.status === 401) {
-      console.error(error);
       return false;
     }
     // TODO: redirect to error page
-    console.error(error);
   }
   return true;
 };

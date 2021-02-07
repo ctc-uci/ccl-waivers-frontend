@@ -89,7 +89,6 @@ const Admin = () => {
         linkElem.click();
       } catch (error) {
         if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
           return false;
         }
       }
@@ -99,13 +98,11 @@ const Admin = () => {
   };
 
   const deleteWaivers = () => {
-    console.log(filesSelected);
     async function deleteWaiver(id) {
       try {
         await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
       } catch (error) {
         if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
           return false;
         }
       }

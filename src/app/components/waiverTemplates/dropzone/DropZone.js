@@ -59,7 +59,6 @@ function Dropzone({ onClose }) {
         await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
       } catch (error) {
         if (error.response.status === 500) {
-          console.error(`Error: ${error}`);
           return false;
         }
       }
