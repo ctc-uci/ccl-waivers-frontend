@@ -55,7 +55,7 @@ function Dropzone({ onClose }) {
 
   const deleteUploadedTemplate = (event) => {
     const index = acceptedFiles.findIndex((file) => file.name
-    === event.target.parentNode.parentNode.id);
+    === event.target.parentNode.parentNode.parentNode.id);
     acceptedFiles.splice(index, 1);
   };
 

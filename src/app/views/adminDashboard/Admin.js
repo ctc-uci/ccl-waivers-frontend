@@ -144,7 +144,7 @@ const Admin = () => {
 
         {filesSelected.length === 0 || waiverList.length === 0 ? (
           <button type="button" className="orange-btn waiver-option disabled-btn">
-            <img src="icons/trash-can-icon.png" alt="Trash Can Icon" height="15px" />
+            <img src="icons/download-icon.png" alt="Trash Can Icon" height="15px" />
             Download
           </button>
 

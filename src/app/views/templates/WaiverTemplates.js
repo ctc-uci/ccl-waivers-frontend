@@ -11,7 +11,7 @@ import './WaiverTemplates.css';
 const WaiverTemplates = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [templates, setTemplates] = useState([]);
+  const [templates, setTemplates] = useState(JSON.parse(localStorage.getItem('templates')) || []);
 
   const { path } = props;
 
@@ -24,12 +24,22 @@ const WaiverTemplates = (props) => {
 
   const getTemplates = async () => {
     const res = await axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
+    localStorage.setItem('templates', JSON.stringify(res.data));
     setTemplates(res.data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getTemplates();
+    if (templates === []) {
+      getTemplates();
+    } else {
+      setIsLoading(false);
+      const res = axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+      if (res.data !== templates) {
+        getTemplates();
+      }
+    }
+    return () => (true);
   }, [templates]);
 
   const togglePopup = () => {
