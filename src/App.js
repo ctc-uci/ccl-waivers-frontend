@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import WaiverSuccess from './app/components/waiverSigning/waiversuccess/WaiverSuccess';
 import waiverDisplay from './app/components/waiverSigning/waiverdisplay/WaiverDisplay';
 import Admin from './app/views/adminDashboard/Admin';
 import WaiverTemplates from './app/views/templates/WaiverTemplates';
@@ -15,7 +14,6 @@ function App() {
         <div className="content">
           <Switch>
             <Route path="/waiverdisplay" exact component={waiverDisplay} />
-            <Route path="/waiversuccess" exact component={WaiverSuccess} />
             <ProtectedRoute exact path="/" component={Admin} />
             <WaiverTemplates exact path="/templates" />
           </Switch>

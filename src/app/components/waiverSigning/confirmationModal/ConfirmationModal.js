@@ -1,14 +1,9 @@
 import React from 'react';
 import './ConfirmationModal.css';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function ConfirmationModal({ pdfRef }) {
-  const history = useHistory();
-  async function sendPDF() {
-    const temp = await pdfRef();
-    history.push('/WaiverSuccess', { pdfRef: temp });
-  }
+function ConfirmationModal({ sendPDF }) {
   return (
     <div className="confirmation-modal">
       <div className="confirmation-modal-title">
@@ -37,7 +32,7 @@ function ConfirmationModal({ pdfRef }) {
   );
 }
 ConfirmationModal.propTypes = {
-  pdfRef: PropTypes.element.isRequired,
+  sendPDF: PropTypes.func.isRequired,
 };
 
 export default ConfirmationModal;
