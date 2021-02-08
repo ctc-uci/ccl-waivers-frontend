@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import linkIcon from '../../../images/dashboard/link.png';
@@ -7,11 +8,14 @@ import './WaiverFile.css';
 const WaiverFile = (props) => {
   const [isCopied, setCopied] = useState(false);
 
+  const baseURL = 'localhost:3000';
+
   const {
-    fileName, url, date, id, setSelected, thumbnailUrl,
+    fileName, date, id, setSelected, thumbnailUrl,
   } = props;
 
-  const handleCopied = () => {
+  const handleCopied = (e) => {
+    e.preventDefault();
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -35,15 +39,16 @@ const WaiverFile = (props) => {
           {' '}
           {date}
         </p>
-        <CopyToClipboard text={url}>
-          <a
+        <CopyToClipboard text={`${baseURL}/${id}`}>
+          <Link
+            to={`/${id}`}
             className="template-copy-link"
             href="# "
             onClick={handleCopied}
           >
             <img src={linkIcon} className="template-copy-icon" style={{ display: isCopied ? 'none' : 'inline' }} alt="link" />
             <span className="template-copy-text">{isCopied ? '\u2713 Copied' : 'Copy Shareable Link'}</span>
-          </a>
+          </Link>
         </CopyToClipboard>
       </div>
     </div>
@@ -51,10 +56,10 @@ const WaiverFile = (props) => {
 };
 
 WaiverFile.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   fileName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  // url: PropTypes.string.isRequired,
   thumbnailUrl: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
 };

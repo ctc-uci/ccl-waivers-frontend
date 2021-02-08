@@ -54,10 +54,10 @@ const WaiverTemplates = (props) => {
   };
 
   const templateList = useMemo(() => templates.map(
-    (temp, idx) => (
+    (temp) => (
       <WaiverFile
         key={temp.id}
-        id={idx}
+        id={temp.id}
         fileName={temp.fileName}
         date={getDate(temp.createdDateTime)}
         url={temp.temporaryDownloadLink}
