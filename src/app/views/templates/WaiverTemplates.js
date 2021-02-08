@@ -34,7 +34,7 @@ const WaiverTemplates = (props) => {
       getTemplates();
     } else {
       setIsLoading(false);
-      const res = axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+      const res = axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
       if (res.data !== templates) {
         getTemplates();
       }
