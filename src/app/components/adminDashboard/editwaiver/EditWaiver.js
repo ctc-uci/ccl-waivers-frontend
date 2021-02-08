@@ -15,11 +15,12 @@ const EditWaiver = ({ id, closePopup }) => {
 
   const getWaiver = async () => {
     const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
-    setWaiver(res.data[0]);
-    setFName(waiver.fname || '');
-    setLName(waiver.lname || '');
-    setRole(waiver.role || '');
-    setNotes(waiver.notes || '');
+    const w = res.data[0];
+    setWaiver(w);
+    setFName(w.name.split(' ')[0] || '');
+    setLName(w.name.split(' ')[1] || '');
+    setRole(w.role || '');
+    setNotes(w.notes || '');
     setIsLoading(false);
   };
 
