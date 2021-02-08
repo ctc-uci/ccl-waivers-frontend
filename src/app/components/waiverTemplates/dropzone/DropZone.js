@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -21,6 +21,20 @@ function Dropzone({ onClose }) {
     accept: 'application/pdf',
   });
 
+  const [uploaded, setUploaded] = useState(false);
+
+  useEffect(() => {
+    let done = true;
+    const progressBars = document.getElementsByClassName('progress');
+    for (let i = 0; i < progressBars; i += 1) {
+      if (progressBars[i].style.width !== '100%') {
+        done = false;
+        break;
+      }
+    }
+    setUploaded(done);
+  });
+
   const dropzoneBox = useMemo(() => {
     let base = 'dropzone-zone';
     if (isDragActive) {
@@ -39,17 +53,32 @@ function Dropzone({ onClose }) {
     isDragAccept,
   ]);
 
+  const myUploadProgress = (myFileId) => (progressEvent) => {
+    const { loaded, total } = progressEvent;
+    const percent = Math.floor((loaded * 100) / total);
+    const bar = document.getElementById(myFileId).childNodes[2].firstChild.firstChild;
+    bar.style.width = `${percent}%`;
+  };
+
   const uploadTemplates = () => {
-    const upload = async (file) => {
-      await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true });
+    const upload = async (file, options) => {
+      await axios.post(`${config.apiUrl}/templates`, file, { withCredentials: true, ...options });
     };
     if (acceptedFiles.length !== 0) {
       for (let i = 0; i < acceptedFiles.length; i += 1) {
+        const options = {
+          onUploadProgress: myUploadProgress(acceptedFiles[i].path),
+        };
+
         const formData = new FormData();
         formData.append('file', acceptedFiles[i]);
-        upload(formData);
+        upload(formData, options);
       }
-      onClose();
+      if (uploaded) {
+        setTimeout(() => {
+          onClose();
+        }, 500);
+      }
     }
   };
 
@@ -87,7 +116,11 @@ function Dropzone({ onClose }) {
                   {' '}
                   KB
                 </td>
-                <td className="progress-bar">Progress Bar</td>
+                <td>
+                  <div className="progress-bar">
+                    <div className="progress" />
+                  </div>
+                </td>
                 <td>
                   <button type="button" className="remove-file-btn" aria-label="Remove" onClick={deleteUploadedTemplate}><span aria-hidden="true">&times;</span></button>
                 </td>

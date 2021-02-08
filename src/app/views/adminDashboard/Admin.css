@@ -6,7 +6,7 @@
 .scrollable-div {
   border: 1px solid lightgray;
   overflow-y: overlay;
-  max-height: 50%;
+  max-height: 80%;
   width: 100%;
 }
 .scrollable-div::-webkit-scrollbar {
