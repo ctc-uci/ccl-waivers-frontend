@@ -15,6 +15,7 @@ const Admin = () => {
   const [filesSelected, setFilesSelected] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [editID, setEditID] = useState(null);
+  const [selection, setSelection] = useState('');
 
   const getWaivers = async () => {
     const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
@@ -30,7 +31,12 @@ const Admin = () => {
     } else {
       setIsLoading(false);
       const res = axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
-      if (res.data !== waiverList) {
+      let db;
+      if (res.data) {
+        db = res.data.map((w) => w.id).sort();
+      }
+      const temp = waiverList.map((w) => w.id).sort();
+      if (db !== undefined && db !== temp) {
         getWaivers();
       }
     }
@@ -59,7 +65,7 @@ const Admin = () => {
 
   const filterBy = (currWaiver, currSearchTerm) => {
     const searchTermLowerCase = currSearchTerm.toLowerCase();
-    if (currSearchTerm !== '') return (currWaiver.fileName.toLowerCase().includes(searchTermLowerCase));
+    if (currSearchTerm !== '') return (currWaiver.fileName.toLowerCase().slice(0, searchTermLowerCase.length) === searchTermLowerCase) || (currWaiver.name.toLowerCase().slice(0, searchTermLowerCase.length) === searchTermLowerCase);
     return (currWaiver);
   };
 
@@ -129,6 +135,39 @@ const Admin = () => {
     setShowPopup(false);
   };
 
+  const sortList = (select) => {
+    const temp = [...waiverListFiltered];
+    if (select === 'A - Z (first name)') {
+      temp.sort((a, b) => ((a.name).localeCompare(b.name)));
+    } else if (select === 'Z - A (first name)') {
+      temp.sort((a, b) => ((a.name).localeCompare(b.name))).reverse();
+    } else if (select === 'Newest') {
+      temp.sort((a, b) => {
+        const diff = Date.parse(b.createdDateTime) - Date.parse(a.createdDateTime);
+        if (diff < 0) return -1;
+        if (diff > 0) return 1;
+        return 0;
+      });
+    } else if (select === 'Oldest') {
+      temp.sort((a, b) => {
+        const diff = Date.parse(a.createdDateTime) - Date.parse(b.createdDateTime);
+        if (diff < 0) return -1;
+        if (diff > 0) return 1;
+        return 0;
+      });
+    }
+    setWaiverListFiltered(temp);
+  };
+
+  useEffect(() => {
+    sortList(selection);
+  }, [selection]);
+
+  const selectSort = (e) => {
+    setSelection(e.target.innerHTML);
+    sortList(e.target.innerHTML);
+  };
+
   return (
     <div className="admin-dashboard">
       <Searchbar keyword={input} setKeyword={updateInput} />
@@ -166,7 +205,7 @@ const Admin = () => {
             Delete
           </button>
         )}
-        <SortFeature />
+        <SortFeature selection={selection} selectSort={selectSort} />
       </div>
       <div className="scrollable-div">
         <table className="waiver-table">

@@ -56,23 +56,11 @@
   margin-bottom: 5px;
   color: #838282;
 }
-.popup-cancel,
-.popup-save {
-  border: transparent;
-  outline: none;
-  border-radius: 40px;
+.popup-btn {
   font-size: 1rem;
   font-weight: 700;
   padding: 8px 25px;
-}
-.popup-cancel {
-  border: 2px solid #f7941e;
-  color: #f7941e;
-  background-color: transparent;
-}
-.popup-save {
-  background-color: #f7941e;
-  color: white;
+  border-radius: 40px;
 }
 .blur {
   width: 100vw;
