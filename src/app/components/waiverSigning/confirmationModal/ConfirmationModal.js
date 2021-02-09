@@ -7,26 +7,26 @@ function ConfirmationModal({ sendPDF }) {
   return (
     <div className="confirmation-modal">
       <div className="confirmation-modal-title">
-        <h3 className="confirmation-modal-text">Confirm your information from the form</h3>
+        <h4 className="confirmation-modal-text">Confirm your information from the form</h4>
       </div>
-      <div className="name">
-        <div className="text-entry">
-          <div>First Name</div>
-          <input type="text" name="First Name" className="confirmation-input" />
+      <div className="confirmation-form">
+        <div className="confirmation-name">
+          <div>
+            <div>First Name</div>
+            <input type="text" name="First Name" className="confirmation-input" />
+          </div>
+          <div>
+            <div>Last Name</div>
+            <input type="text" name="First Name" className="confirmation-input" />
+          </div>
         </div>
-        <div className="text-entry">
-          <div>Last Name</div>
-          <input type="text" name="First Name" className="confirmation-input" />
-        </div>
-      </div>
-      <div className="name">
         <div className="text-entry">
           <div>Email</div>
-          <input type="text" name="Email" className="confirmation-input-email" />
+          <input type="email" name="Email" className="confirmation-input-email" />
         </div>
-      </div>
-      <div className="confirmation-modal-submit-wrapper">
-        <button type="button" className="confirmation-modal-submit" onClick={sendPDF}>Submit Form</button>
+        <div className="confirmation-modal-submit-wrapper">
+          <button type="button" className="orange-btn popup-btn" onClick={sendPDF}>Submit Form</button>
+        </div>
       </div>
     </div>
   );

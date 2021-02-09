@@ -18,7 +18,7 @@
   height: 100%;
 }
 .content {
-  padding: 20px;
+  padding: 20px 0;
   height: calc(100vh - 125px);
 }
 .header {
