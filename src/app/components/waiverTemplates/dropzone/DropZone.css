@@ -5,6 +5,7 @@
   align-items: center;
   margin: auto;
   max-width: 600px;
+  padding: 60px 0;
   border-width: 2px;
   border-radius: 2px;
   border-color: #00a3ff;
@@ -26,75 +27,46 @@
   border-color: #ff1744;
 }
 
-.dropzone-firstLine {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0px;
-  color: black;
-  width: 100%;
-  text-align: left;
-  background-color: #f7941e;
+.dropzone-text {
+  line-height: 1.5rem;
 }
 
-.browse-btn {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0px;
-  color: #0f68a8;
-  background-color: #f7941e;
+.fileSelector {
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: 530;
   border: none;
   outline: none;
-  cursor: pointer;
-}
-
-.upload-icon {
-  width: 100px;
-  height: 100px;
-}
-
-.upload-table {
-  text-align: left;
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #e5e5e5;
-}
-
-.upload-table thead {
-  border-bottom: 2px black solid;
-}
-
-.upload-table th {
-  padding: 15px;
-  padding-right: 0;
-  font-weight: 600;
-}
-
-.upload-table td {
-  padding: 15px;
-  padding-right: 0;
-  font-weight: 400;
-}
-
-.remove-file-btn {
-  font-weight: 600;
-  border-color: transparent;
   background-color: transparent;
-  color: #838282;
-  font-size: 1rem;
-  margin-top: -20px;
-  cursor: pointer;
-  outline: none;
+  text-decoration: underline #0065b2;
+  color: #0065b2;
 }
-
-.progress-bar {
+.files-list {
+  list-style-type: none;
+  padding: 0;
+}
+.file-item {
+  display: flex;
   width: 100%;
-  border-radius: 15px;
-  background-color: lightgray;
-  overflow: hidden;
+  column-gap: 20px;
+  align-items: center;
 }
-
-.progress {
-  width: 0%;
-  height: 15px;
-  background-color: #00aeef;
+.file-item p {
+  margin: 10px 0;
+}
+.remove-file-btn {
+  margin-left: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.spinning-progress {
+  animation: sp 2.5s infinite linear;
+}
+@keyframes sp {
+  100% {
+    transform: rotate(360deg);
+  }
 }
