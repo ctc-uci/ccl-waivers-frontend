@@ -46,6 +46,7 @@
   grid-gap: 25px;
   margin: 20px 0;
   width: 100%;
+  align-items: center;
 }
 .waiver-option {
   font-size: 1rem;

@@ -7,10 +7,20 @@ import Layout from './app/components/layout/Layout';
 import WaiverDisplay from './app/components/waiverSigning/waiverdisplay/WaiverDisplay';
 
 function App() {
+  const waiverDisplayTitle = () => (
+    <div className="waiver-screen-title">
+      <h6 className="waiver-screen-text">Waiver Page</h6>
+    </div>
+  );
+
   return (
     <div className="App">
       <Router>
-        <Layout />
+        <Switch>
+          <Route exact path="/" component={Layout} />
+          <Route exact path="/templates" component={Layout} />
+          <Route path="/:id" component={waiverDisplayTitle} />
+        </Switch>
         <div className="content">
           <Switch>
             <ProtectedRoute exact path="/" component={Admin} />

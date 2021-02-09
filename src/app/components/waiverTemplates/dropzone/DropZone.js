@@ -25,9 +25,9 @@ function Dropzone({ onClose }) {
 
   useEffect(() => {
     let done = true;
-    const progressBars = document.getElementsByClassName('progress');
-    for (let i = 0; i < progressBars; i += 1) {
-      if (progressBars[i].style.width !== '100%') {
+    const progress = document.getElementsByClassName('progress');
+    for (let i = 0; i < progress; i += 1) {
+      if (progress.innerHTML !== '<img alt="Progress spinner" src="/icons/check-icon.png" height="50px" />') {
         done = false;
         break;
       }
@@ -104,7 +104,7 @@ function Dropzone({ onClose }) {
         <ul className="files-list">
           {acceptedFiles.map((file) => (
             <li key={file.path} className="file-item">
-              <span id={file.path}>
+              <span id={file.path} className="progress">
                 <div />
               </span>
               <p>

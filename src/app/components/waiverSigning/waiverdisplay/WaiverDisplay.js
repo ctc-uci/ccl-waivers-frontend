@@ -64,18 +64,17 @@ function WaiverDisplay({ match }) {
     <>
       {isSuccess ? (<WaiverSuccess pdf={pdf} />) : (
         <div className="waiver-screen-background">
-          <div className="waiver-screen-title">
-            <h1 className="waiver-screen-text">This is the waiver page</h1>
-          </div>
           {isLoading ? <Spinner className="sk-center" /> : (
-            <div className="pdf-viewer">
-              <pdf-viewer src={template} ref={pdfViewer} />
-            </div>
-          )}
-          {submitReady ? (<ConfirmationModal sendPDF={sendPDF} />) : (
-            <button type="button" className="waiver-submit-button" onClick={postPDF}>
-              <h3>I have filled out the pdf</h3>
-            </button>
+            <>
+              <div className="pdf-viewer">
+                <pdf-viewer src={template} ref={pdfViewer} />
+              </div>
+              {submitReady ? (<ConfirmationModal sendPDF={sendPDF} />) : (
+                <button type="button" className="waiver-submit-button" onClick={postPDF}>
+                  <h3>I have filled out the pdf</h3>
+                </button>
+              )}
+            </>
           )}
         </div>
       )}
