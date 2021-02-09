@@ -2,6 +2,7 @@
   width: 75%;
   margin: 0 auto;
   height: 100%;
+  padding: 20px 0;
 }
 .scrollable-div {
   border: 1px solid lightgray;
