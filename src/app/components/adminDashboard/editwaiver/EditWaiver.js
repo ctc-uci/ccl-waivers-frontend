@@ -17,8 +17,13 @@ const EditWaiver = ({ id, closePopup }) => {
     const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
     const w = res.data[0];
     setWaiver(w);
-    setFName(w.name.split(' ')[0] || '');
-    setLName(w.name.split(' ')[1] || '');
+    if (w.name) {
+      setFName(w.name.split(' ')[0]);
+      setLName(w.name.split(' ')[1]);
+    } else {
+      setFName('');
+      setLName('');
+    }
     setRole(w.role || '');
     setNotes(w.notes || '');
     setIsLoading(false);
@@ -86,8 +91,8 @@ const EditWaiver = ({ id, closePopup }) => {
         </label>
       </div>
       <div className="popup-buttons">
-        <button type="button" className="popup-cancel" onClick={closePopup}>Cancel</button>
-        <button type="button" className="popup-save" onClick={saveInfo}>Save</button>
+        <button type="button" className="orange-outline-btn popup-btn" onClick={closePopup}>Cancel</button>
+        <button type="button" className="orange-btn popup-btn" onClick={saveInfo}>Save</button>
       </div>
     </>
   );
