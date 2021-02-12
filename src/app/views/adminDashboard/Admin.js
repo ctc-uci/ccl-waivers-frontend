@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+import JSZipUtils from 'jszip-utils';
 import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
 import './Admin.css';
 import config from '../../../config';
@@ -16,6 +19,9 @@ const Admin = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [editID, setEditID] = useState(null);
   const [selection, setSelection] = useState('');
+  // const [downloadCount, setDownloadCount] = useState(0);
+
+  const zip = new JSZip();
 
   const getWaivers = async () => {
     const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
@@ -99,18 +105,38 @@ const Admin = () => {
   };
 
   const downloadWaivers = () => {
-    const download = async (id) => {
-      const res = await axios.get(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
-      const link = res.data[0].temporaryDownloadLink;
-      const linkElem = document.createElement('a');
-      linkElem.href = link;
-      document.body.appendChild(linkElem);
-      linkElem.click();
+    const download = (count) => {
+      if (count === filesSelected.length) {
+        zip.generateAsync({ type: 'blob' })
+          .then((content) => {
+            saveAs(content, 'Waivers.zip');
+          });
+      }
     };
-    if (filesSelected.length !== 0) {
-      download(filesSelected[0]);
-    }
+    let count = 0;
+    filesSelected.forEach((file) => {
+      axios.get(`${config.apiUrl}/waivers/${file}`, { withCredentials: true })
+        .then((res) => {
+          const f = res.data[0];
+          JSZipUtils.getBinaryContent(f.temporaryDownloadLink, (err, data) => {
+            if (!err) {
+              zip.file(f.fileName, data, { binary: true });
+              count += 1;
+              download(count);
+            }
+          });
+        });
+    });
   };
+
+  // useEffect(() => {
+  //   if (filesSelected.length > 0 && downloadCount === filesSelected.length) {
+  //     zip.generateAsync({ type: 'blob' })
+  //       .then((content) => {
+  //         saveAs(content, `${new Date()}.zip`);
+  //       });
+  //   }
+  // }, [downloadCount]);
 
   const deleteWaivers = () => {
     async function deleteWaiver(id) {
