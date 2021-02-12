@@ -26,7 +26,7 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    if (waiverList === []) {
+    if (waiverList.length === 0) {
       getWaivers();
     } else {
       setIsLoading(false);

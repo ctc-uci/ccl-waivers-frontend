@@ -30,7 +30,7 @@ const WaiverTemplates = (props) => {
   };
 
   useEffect(() => {
-    if (templates === []) {
+    if (templates.length === 0) {
       getTemplates();
     } else {
       setIsLoading(false);
