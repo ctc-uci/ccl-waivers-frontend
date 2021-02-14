@@ -13,7 +13,7 @@ const Layout = () => (
           <p>Waiver Templates</p>
         </NavLink>
       </div>
-      <NavLink exact to="/logout" className="logout-link">
+      <NavLink exact to="/" className="logout-link">
         <p>Logout</p>
       </NavLink>
     </div>

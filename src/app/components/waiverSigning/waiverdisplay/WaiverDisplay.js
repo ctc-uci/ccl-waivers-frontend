@@ -10,14 +10,16 @@ import Spinner from '../../loadingSpinner/spinner';
 function WaiverDisplay({ match }) {
   const [pdfService, setPdfService] = useState(null);
   const [submitReady, setSubmitReady] = useState(false);
-  const pdfViewer = useRef(null);
-  const [isSuccess, setSuccess] = useState(sessionStorage.getItem('waiversuccess') || false);
+  const [isSuccess, setSuccess] = useState(localStorage.getItem('waiversuccess') || false);
   const [pdf, setPDF] = useState(null);
-  const [template, setTemplate] = useState('');
+  const [template, setTemplate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const pdfViewer = useRef(null);
 
   const getPDF = async () => {
-    const res = await axios.get(`${config.apiUrl}/templates/${match.params.id}`, { withCredentials: true });
+    const res = await axios.get(`${config.apiUrl}/templates/${match.params.id}`, {
+      withCredentials: true,
+    });
     setTemplate(res.data[0].temporaryDownloadLink);
     setIsLoading(false);
   };
@@ -28,9 +30,11 @@ function WaiverDisplay({ match }) {
     // Save the reference to the pdfService so we can use it later.
     // List of functions provided by the pdfService are listed here:
     // https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.service.ts
-    if (!isSuccess && !isLoading) {
-      pdfViewer.current.addEventListener('service', (event) => { setPdfService(event.detail); });
-    }
+    setTimeout(5000, () => {
+      pdfViewer.current.addEventListener('service', (event) => {
+        setPdfService(event.detail);
+      });
+    });
   }, []);
   // Download PDF (demo)
   //
@@ -38,6 +42,8 @@ function WaiverDisplay({ match }) {
   // Instead of downloading the blob, we could send it off to a server instead.
   // This is just a demo showing that the blob is generated correctly.
   async function downloadPDF() {
+    console.log('calling inside download pdf');
+    console.log(pdfService);
     const blob = await pdfService.getCurrentDocumentAsBlob();
     return blob;
   }
@@ -54,22 +60,28 @@ function WaiverDisplay({ match }) {
   }
 
   async function sendPDF() {
-    setSuccess(true);
     const temp = await downloadPDF();
     setPDF(temp);
-    sessionStorage.setItem('waiversuccess', true);
+    localStorage.setItem('waiversuccess', true);
+    setSuccess(true);
   }
 
   return (
     <>
-      {isSuccess ? (<WaiverSuccess pdf={pdf} />) : (
+      {isSuccess ? (
+        <WaiverSuccess pdf={pdf} />
+      ) : (
         <div className="waiver-screen-background">
-          {isLoading ? <Spinner className="sk-center" /> : (
+          {isLoading ? (
+            <Spinner className="sk-center" />
+          ) : (
             <>
               <div className="pdf-viewer">
                 <pdf-viewer src={template} ref={pdfViewer} />
               </div>
-              {submitReady ? (<ConfirmationModal sendPDF={sendPDF} />) : (
+              {submitReady ? (
+                <ConfirmationModal sendPDF={sendPDF} />
+              ) : (
                 <button type="button" className="waiver-submit-button" onClick={postPDF}>
                   <h3>I have filled out the pdf</h3>
                 </button>
