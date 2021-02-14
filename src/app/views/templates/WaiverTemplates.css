@@ -1,31 +1,23 @@
 .templates-container {
-    margin-left: 50px
+  margin-left: 50px;
+  padding: 20px 0;
 }
 
 .template-list {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .template-upload-btn {
-    font-weight: bold;
-    background-color: #F7941E;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-	border-radius: 25px;
-	border: 1px solid #F7941E;
-	display: inline-block;
-    width: 220px;
-    height: 40px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    outline: none;
+  font-size: 15px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .template-upload-icon {
-    margin: auto;
-    margin-bottom: 0;
-    display: block;
-    width: 50px;
+  margin: auto;
+  margin-bottom: 0;
+  display: block;
+  width: 50px;
 }

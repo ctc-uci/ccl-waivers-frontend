@@ -1,0 +1,68 @@
+/* copy pasted from EditWaiver.css */
+.rename-modal-popup {
+    background-color: white;
+    position: absolute;
+    top: calc(50vh - 125px);
+    left: calc(50vw - 225px);
+    width: 400px;
+    height: 200px;
+    padding: 25px;
+    border-radius: 10px;
+    z-index: 999999;
+}
+
+.rename-modal-popup h2 {
+    display: inline-block;
+}
+
+.rename-modal-popup input[type="text"],
+.rename-modal-popup textarea {
+    padding: 5px;
+    width: 250px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #838282;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.rename-modal-popup textarea {
+    width: 98%;
+    resize: none;
+}
+
+.rename-modal-popup-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rename-modal-close {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    width: fit-content;
+    margin-left: auto;
+    font-size: 1.5rem;
+    cursor: pointer;
+    float: right;
+}
+
+.rename-modal-popup-btn {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 8px 25px;
+    border-radius: 40px;
+    margin-left: 10px;
+  }
+
+.rename-modal-blur {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+}

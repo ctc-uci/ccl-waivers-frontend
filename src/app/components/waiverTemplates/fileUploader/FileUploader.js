@@ -20,7 +20,7 @@ const FileUploader = (props) => {
     return () => {
       document.removeEventListener('keydown', onKeyDown, false);
     };
-  });
+  }, []);
 
   return (
     <>
@@ -28,9 +28,6 @@ const FileUploader = (props) => {
         <div className="popup-backdrop" />
       </a>
       <div className="popup-box">
-        <button onClick={closeUpload} type="button" className="popup-close-btn" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
         <h1 className="title">
           Upload Template
         </h1>

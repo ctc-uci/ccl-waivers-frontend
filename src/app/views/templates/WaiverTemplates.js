@@ -11,7 +11,7 @@ import './WaiverTemplates.css';
 const WaiverTemplates = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [templates, setTemplates] = useState([]);
+  const [templates, setTemplates] = useState(JSON.parse(localStorage.getItem('templates')) || []);
 
   const { path } = props;
 
@@ -24,38 +24,46 @@ const WaiverTemplates = (props) => {
 
   const getTemplates = async () => {
     const res = await axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
+    localStorage.setItem('templates', JSON.stringify(res.data));
     setTemplates(res.data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getTemplates();
-  });
+    if (templates.length === 0) {
+      getTemplates();
+    } else {
+      setIsLoading(false);
+      const res = axios.get(`${config.apiUrl}/templates`, { withCredentials: true });
+      if (res.data !== templates) {
+        getTemplates();
+      }
+    }
+    return () => (true);
+  }, []);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
-  const [filesSelected, setFilesSelected] = useState(templates.map(() => false));
-
-  const setFileSelected = (n, selected) => {
-    filesSelected[n] = selected;
-    setFilesSelected(filesSelected);
-  };
-
   const templateList = useMemo(() => templates.map(
-    (temp, idx) => (
-      <WaiverFile
-        key={temp.id}
-        id={idx}
-        fileName={temp.fileName}
-        date={getDate(temp.createdDateTime)}
-        url={temp.temporaryDownloadLink}
-        thumbnailUrl={temp.thumbnailUrl}
-        initCopy={false}
-        setSelected={setFileSelected}
-      />
-    ),
+    (temp, idx) => {
+      const deleteTemplate = () => {
+        setTemplates(templates.filter((_, i) => idx !== i));
+      };
+      return (
+        <WaiverFile
+          key={temp.id}
+          id={temp.id}
+          templateName={temp.fileName}
+          date={getDate(temp.createdDateTime)}
+          url={temp.temporaryDownloadLink}
+          thumbnailUrl={temp.thumbnailUrl}
+          initCopy={false}
+          parentDelete={deleteTemplate}
+        />
+      );
+    },
   ), [templates]);
 
   return (
@@ -66,7 +74,7 @@ const WaiverTemplates = (props) => {
             <>
               <button
                 type="button"
-                className="template-upload-btn"
+                className="orange-btn template-upload-btn"
                 href="#"
                 onClick={togglePopup}
               >

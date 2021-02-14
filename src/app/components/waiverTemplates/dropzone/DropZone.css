@@ -5,8 +5,7 @@
   align-items: center;
   margin: auto;
   max-width: 600px;
-  padding: 20px;
-  padding-bottom: 30px;
+  padding: 60px 0;
   border-width: 2px;
   border-radius: 2px;
   border-color: #00a3ff;
@@ -28,37 +27,46 @@
   border-color: #ff1744;
 }
 
-.dropzone-firstLine {
-  font-weight: 600;
-  margin-bottom: 0px;
-  font-size: 25px;
-  text-align: center;
-}
-
-.dropzone-secondLine {
-  color: black;
-  font-weight: 600;
-  margin-bottom: -10px;
-  font-size: 20px;
-  text-align: center;
+.dropzone-text {
+  line-height: 1.5rem;
 }
 
 .fileSelector {
-  background-color: #f7941e;
-  border-radius: 20px;
-  border: 1px solid #f7941e;
-  display: inline-block;
   cursor: pointer;
   font-family: Arial;
   font-size: 15px;
   font-weight: 530;
-  color: white;
-  padding: 5px 25px;
-  width: 220px;
-  height: 40px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-decoration: underline #0065b2;
+  color: #0065b2;
 }
-
-.upload-icon {
-  width: 100px;
-  height: 100px;
+.files-list {
+  list-style-type: none;
+  padding: 0;
+}
+.file-item {
+  display: flex;
+  width: 100%;
+  column-gap: 20px;
+  align-items: center;
+}
+.file-item p {
+  margin: 10px 0;
+}
+.remove-file-btn {
+  margin-left: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.spinning-progress {
+  animation: sp 2.5s infinite linear;
+}
+@keyframes sp {
+  100% {
+    transform: rotate(360deg);
+  }
 }
