@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './waiverDisplay.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ function WaiverDisplay({ match }) {
   const [pdf, setPDF] = useState(null);
   const [template, setTemplate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const pdfViewer = useRef(null);
+  // const pdfViewer = useRef(null);
 
   const getPDF = async () => {
     const res = await axios.get(`${config.apiUrl}/templates/${match.params.id}`, {
@@ -24,17 +24,20 @@ function WaiverDisplay({ match }) {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    getPDF();
-    // OnLoad, PDFViewer emits a reference to its pdfService.
-    // Save the reference to the pdfService so we can use it later.
-    // List of functions provided by the pdfService are listed here:
-    // https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.service.ts
-    setTimeout(5000, () => {
-      pdfViewer.current.addEventListener('service', (event) => {
+  const preparePdfService = (pdfViewer) => {
+    if (pdfViewer != null) {
+      // OnLoad, PDFViewer emits a reference to its pdfService.
+      // Save the reference to the pdfService so we can use it later.
+      // List of functions provided by the pdfService are listed here:
+      // https://github.com/stephanrauh/ngx-extended-pdf-viewer/blob/master/projects/ngx-extended-pdf-viewer/src/lib/ngx-extended-pdf-viewer.service.ts
+      pdfViewer.addEventListener('service', (event) => {
         setPdfService(event.detail);
       });
-    });
+    }
+  };
+
+  useEffect(() => {
+    getPDF();
   }, []);
   // Download PDF (demo)
   //
@@ -77,7 +80,7 @@ function WaiverDisplay({ match }) {
           ) : (
             <>
               <div className="pdf-viewer">
-                <pdf-viewer src={template} ref={pdfViewer} />
+                <pdf-viewer src={template} ref={preparePdfService} />
               </div>
               {submitReady ? (
                 <ConfirmationModal sendPDF={sendPDF} />
