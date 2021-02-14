@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import './WaiverSuccess.css';
+import PropTypes from 'prop-types';
 import cclImage from '../../../images/ccl-logo.png';
 
-function WaiverSuccess() {
-  const pdf = window.history.state.state.pdfRef;
+function WaiverSuccess({ pdf }) {
+  // const pdf = window.history.state.state.pdfRef;
   useEffect(() => {
     document.body.style.background = ' #e8e7ec';
   }, []);
@@ -56,5 +57,9 @@ function WaiverSuccess() {
     </div>
   );
 }
+
+WaiverSuccess.propTypes = {
+  pdf: PropTypes.element.isRequired,
+};
 
 export default WaiverSuccess;

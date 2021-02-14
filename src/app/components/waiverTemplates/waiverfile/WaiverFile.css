@@ -6,6 +6,20 @@
     flex-direction: row;
 }
 
+.template-more-btn {
+    position: absolute;
+    right: 0;
+    padding: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.template-more-btn > img {
+    height: 20px;
+}
+
 .template-thumbnail {
     height: 400px;
     width: 300px;
@@ -15,10 +29,6 @@
     margin-right: 150px;
     display: flex;
     position: relative;
-}
-
-.template-checkbox {
-    position: absolute;
 }
 
 .template-thumbnail-img {
