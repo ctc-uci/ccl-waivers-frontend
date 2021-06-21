@@ -1,73 +1,39 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
-import JSZipUtils from 'jszip-utils';
-import Modal from 'react-modal';
 import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
-import './Admin.css';
 import config from '../../../config';
 import Spinner from '../../components/loadingSpinner/spinner';
 import EditWaiver from '../../components/adminDashboard/editwaiver/EditWaiver';
 import SortFeature from '../../components/adminDashboard/sortfeature/SortFeature';
+import './Admin.css';
 
 const Admin = () => {
-  const [waiverList, setWaiverList] = useState(JSON.parse(localStorage.getItem('waivers')) || []);
-  const [waiverListFiltered, setWaiverListFiltered] = useState(
-    JSON.parse(localStorage.getItem('waivers')) || [],
-  );
+  const [waiverList, setWaiverList] = useState([]);
+  const [waiverListFiltered, setWaiverListFiltered] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [filesSelected, setFilesSelected] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [editID, setEditID] = useState(null);
   const [selection, setSelection] = useState('');
-  const [openId, setOpenId] = useState(null);
-
-  function closeModal() {
-    setOpenId(false);
-  }
-
-  function openModal(id) {
-    setOpenId(id);
-  }
-
-  const zip = new JSZip();
 
   const getWaivers = async () => {
-    const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
-    localStorage.setItem('waivers', JSON.stringify(res.data));
-    setWaiverList(res.data);
-    setWaiverListFiltered(res.data);
-    setIsLoading(false);
+    try {
+      const res = await axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
+      setWaiverList(res.data);
+      setWaiverListFiltered(res.data);
+      setIsLoading(false);
+    } catch (err) {
+      alert(err);
+    }
   };
 
   useEffect(() => {
-    if (waiverList.length === 0) {
-      getWaivers();
-    } else {
-      setIsLoading(false);
-      const res = axios.get(`${config.apiUrl}/waivers`, { withCredentials: true });
-      let db;
-      if (res.data) {
-        db = res.data.map((w) => w.id).sort();
-      }
-      const temp = waiverList.map((w) => w.id).sort();
-      if (db !== undefined && db !== temp) {
-        getWaivers();
-      }
-    }
-    return () => true;
-  }, [waiverList]);
+    getWaivers();
+  }, []);
 
-  const getDate = (uploadDate) => {
-    const dateObj = new Date(uploadDate);
-    return `${dateObj.toLocaleDateString(undefined, { month: 'short' })}
-            ${dateObj.toLocaleDateString(undefined, { day: '2-digit' })},
-            ${dateObj.toLocaleDateString(undefined, { year: 'numeric' })}`;
-  };
+  const getDate = (uploadDate) => uploadDate;
 
   const selectWaiver = (event) => {
     const tablerow = event.target.parentNode.parentNode;
@@ -87,9 +53,9 @@ const Admin = () => {
     if (currSearchTerm !== '') {
       return (
         currWaiver.fileName.toLowerCase().slice(0, searchTermLowerCase.length)
-          === searchTermLowerCase
-        || currWaiver.name.toLowerCase().slice(0, searchTermLowerCase.length)
-         === searchTermLowerCase
+        === searchTermLowerCase
+        || currWaiver.name.toLowerCase()
+          .slice(0, searchTermLowerCase.length) === searchTermLowerCase
       );
     }
     return currWaiver;
@@ -124,29 +90,6 @@ const Admin = () => {
     setFilesSelected([]);
   };
 
-  const downloadWaivers = () => {
-    const download = (count) => {
-      if (count === filesSelected.length) {
-        zip.generateAsync({ type: 'blob' }).then((content) => {
-          saveAs(content, 'Waivers.zip');
-        });
-      }
-    };
-    let count = 0;
-    filesSelected.forEach((file) => {
-      axios.get(`${config.apiUrl}/waivers/${file}`, { withCredentials: true }).then((res) => {
-        const f = res.data[0];
-        JSZipUtils.getBinaryContent(f.temporaryDownloadLink, (err, data) => {
-          if (!err) {
-            zip.file(f.fileName, data, { binary: true });
-            count += 1;
-            download(count);
-          }
-        });
-      });
-    });
-  };
-
   const deleteWaivers = () => {
     async function deleteWaiver(id) {
       await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
@@ -161,13 +104,14 @@ const Admin = () => {
     }
   };
 
-  const editWaiver = (e) => {
+  const editWaiver = (waiverID) => {
     setShowPopup(true);
-    setEditID(e.target.parentNode.parentNode.id);
+    setEditID(waiverID);
   };
 
   const onClose = () => {
     setShowPopup(false);
+    getWaivers();
   };
 
   const sortList = (select) => {
@@ -224,18 +168,6 @@ const Admin = () => {
 
         {filesSelected.length === 0 || waiverList.length === 0 ? (
           <button type="button" className="orange-btn waiver-option disabled-btn">
-            <img src="icons/download-icon.png" alt="Trash Can Icon" height="15px" />
-            Download
-          </button>
-        ) : (
-          <button type="button" className="orange-btn waiver-option" onClick={downloadWaivers}>
-            <img src="icons/download-icon.png" alt="Download Icon" height="15px" />
-            Download
-          </button>
-        )}
-
-        {filesSelected.length === 0 || waiverList.length === 0 ? (
-          <button type="button" className="orange-btn waiver-option disabled-btn">
             <img src="icons/trash-can-icon.png" alt="Trash Can Icon" height="15px" />
             Delete
           </button>
@@ -249,54 +181,52 @@ const Admin = () => {
       </div>
       <div className="scrollable-div">
         <table className="waiver-table">
-          <tr>
-            <th>&nbsp;</th>
-            <th>Name</th>
-            <th>Form</th>
-            <th>Role</th>
-            <th>Date Signed</th>
-            <th>Notes</th>
-            <th>&nbsp;</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Name</th>
+              <th>Form</th>
+              <th>Role</th>
+              <th>Date Signed</th>
+              <th>Notes</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
           {isLoading ? (
             <Spinner className="sk-center" />
           ) : (
-            waiverListFiltered.map((waiver) => (
-              <tr id={waiver.id} key={waiver.id}>
-                <td>
-                  <input
-                    className="table-checkbox"
-                    name="waivers"
-                    type="checkbox"
-                    onChange={selectWaiver}
-                  />
-                </td>
-                <td>{waiver.name}</td>
-                <td
-                  onClick={() => {
-                    openModal(waiver.id);
-                  }}
-                  className="waiver-form"
-                >
-                  {waiver.fileName}
-                </td>
-                <Modal
-                  isOpen={openId === waiver.id}
-                  onRequestClose={closeModal}
-                  contentLabel="Example Modal"
-                >
-                  <img src={waiver.thumbnail} alt="" />
-                </Modal>
-                <td>{waiver.role}</td>
-                <td>{getDate(waiver.createdDateTime)}</td>
-                <td>{waiver.notes}</td>
-                <td>
-                  <button type="button" className="waiver-edit-btn" onClick={editWaiver}>
-                    <img src="icons/edit-icon.png" alt="Edit Icon" height="15px" />
-                  </button>
-                </td>
-              </tr>
-            ))
+            waiverListFiltered && waiverListFiltered.length > 0
+              ? waiverListFiltered.map((waiver) => (
+                <tr id={waiver.id} key={waiver.id}>
+                  <td>
+                    <input
+                      className="table-checkbox"
+                      name="waivers"
+                      type="checkbox"
+                      onChange={selectWaiver}
+                    />
+                  </td>
+                  <td>{waiver.name}</td>
+                  <td>
+                    <a
+                      className="waiver-form"
+                      href={waiver.thumbnail}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {waiver.fileName}
+                    </a>
+                  </td>
+                  <td>{waiver.role}</td>
+                  <td>{getDate(waiver.createdDateTime)}</td>
+                  <td>{waiver.notes}</td>
+                  <td>
+                    <button type="button" className="waiver-edit-btn" onClick={() => editWaiver(waiver.id)}>
+                      <img src="icons/edit-icon.png" alt="Edit Icon" height="15px" />
+                    </button>
+                  </td>
+                </tr>
+              )) : null
           )}
         </table>
       </div>
