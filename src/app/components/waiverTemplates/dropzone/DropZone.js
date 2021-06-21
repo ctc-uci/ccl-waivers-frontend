@@ -79,7 +79,7 @@ function Dropzone({ onClose }) {
       }
       if (uploaded) {
         setTimeout(() => {
-          onClose();
+          window.location.reload(false);
         }, 750);
       }
     }
