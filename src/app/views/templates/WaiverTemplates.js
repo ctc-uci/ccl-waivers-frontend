@@ -11,7 +11,7 @@ import './WaiverTemplates.css';
 const WaiverTemplates = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [templates, setTemplates] = useState(JSON.parse(localStorage.getItem('templates')) || []);
+  const [templates, setTemplates] = useState([]);
 
   const { path } = props;
 

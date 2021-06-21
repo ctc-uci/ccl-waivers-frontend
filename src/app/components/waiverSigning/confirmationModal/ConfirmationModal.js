@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ConfirmationModal.css';
-// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function ConfirmationModal({ sendPDF }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   return (
     <div className="confirmation-modal">
       <div className="confirmation-modal-title">
@@ -13,11 +14,25 @@ function ConfirmationModal({ sendPDF }) {
         <div className="confirmation-name">
           <div>
             <div>First Name</div>
-            <input type="text" name="First Name" className="confirmation-input" />
+            <input
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+              type="text"
+              name="First Name"
+              className="confirmation-input"
+            />
           </div>
           <div>
             <div>Last Name</div>
-            <input type="text" name="First Name" className="confirmation-input" />
+            <input
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+              type="text"
+              name="First Name"
+              className="confirmation-input"
+            />
           </div>
         </div>
         <div className="text-entry">
@@ -25,7 +40,15 @@ function ConfirmationModal({ sendPDF }) {
           <input type="email" name="Email" className="confirmation-input-email" />
         </div>
         <div className="confirmation-modal-submit-wrapper">
-          <button type="button" className="orange-btn popup-btn" onClick={sendPDF}>Submit Form</button>
+          <button
+            type="button"
+            className="orange-btn popup-btn"
+            onClick={() => {
+              sendPDF(`${firstName} ${lastName}`);
+            }}
+          >
+            Submit Form
+          </button>
         </div>
       </div>
     </div>

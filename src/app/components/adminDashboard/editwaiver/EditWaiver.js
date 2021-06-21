@@ -50,8 +50,8 @@ const EditWaiver = ({ id, closePopup }) => {
       newWaiver.lname = lName;
       newWaiver.role = role;
       newWaiver.notes = notes;
-      // const res = await axios.patch(`${config.apiUrl}/waivers/${id}`,
-      // oldWaiver, { withCredentials: true });
+      await axios.post(`${config.apiUrl}/waivers/${id}`,
+        newWaiver, { withCredentials: true });
     };
     updateWaiver();
     closePopup();

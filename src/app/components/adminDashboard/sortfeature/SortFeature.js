@@ -32,7 +32,6 @@ const SortFeature = ({ selection, selectSort }) => {
         <button type="button" className="sort-selection" onClick={selectSort}>Newest</button>
         <button type="button" className="sort-selection" onClick={selectSort}>Oldest</button>
         <button type="button" className="sort-selection" onClick={selectSort}>A - Z (first name)</button>
-        <button type="button" className="sort-selection" onClick={selectSort}>Z - A (first name)</button>
       </div>
     </div>
   );
