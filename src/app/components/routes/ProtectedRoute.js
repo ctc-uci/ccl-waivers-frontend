@@ -29,7 +29,7 @@ const ProtectedRoute = (props) => {
     (async () => {
       const verified = await verifyToken();
       console.log(verified);
-      setIsAuthenticated(true); // temp: change to verified
+      setIsAuthenticated(verified);
       setIsLoading(false);
     })();
   }, []);
