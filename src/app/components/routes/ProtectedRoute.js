@@ -9,7 +9,8 @@ const signinEndpoint = `${config.apiUrl}/auth/signin`;
 
 const verifyToken = async () => {
   try {
-    await axios.get(verifyEndpoint, { withCredentials: true });
+    const res = await axios.get(verifyEndpoint, { withCredentials: true });
+    console.log(res);
   } catch (error) {
     if (error.response.status === 401) {
       return false;
@@ -26,6 +27,7 @@ const ProtectedRoute = (props) => {
   useEffect(() => {
     (async () => {
       const verified = await verifyToken();
+      console.log(verified);
       setIsAuthenticated(verified);
       setIsLoading(false);
     })();
