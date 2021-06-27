@@ -1,11 +1,8 @@
 .confirmation-modal {
   background-color: white;
   max-width: fit-content;
-  margin-bottom: 0vh;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
+  margin: 0 auto;
 }
 
 .confirmation-modal-title {
@@ -47,7 +44,9 @@
 .confirmation-input,
 .confirmation-input-email {
   width: 95%;
-  padding: 5px;
+  -webkit-appearance:none;
+  padding: 5px 0;
   font-size: 0.9rem;
   margin-top: 5px;
+  border: 1px solid black;
 }
