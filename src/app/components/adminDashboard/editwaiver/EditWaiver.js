@@ -85,7 +85,9 @@ const EditWaiver = ({ id, closePopup }) => {
       </div>
       <div className="popup-one-col">
         <label htmlFor="role">
-          <p className="popup-info">Notes</p>
+          <p className="popup-info">
+            {`Notes: Currently ${notes.length} characters (100 character limit)`}
+          </p>
           <textarea rows="3" value={notes} onChange={(e) => setNotes(e.target.value)} />
         </label>
       </div>

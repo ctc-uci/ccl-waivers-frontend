@@ -67,6 +67,9 @@
   cursor: pointer;
   background-color: transparent;
 }
+.waiver-notes-diplay {
+  word-break: break-all;
+}
 .selected-text {
   outline: none;
   padding: 0;

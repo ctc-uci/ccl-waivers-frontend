@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import Searchbar from '../../components/adminDashboard/searchbar/Searchbar';
 import config from '../../../config';
 import Spinner from '../../components/loadingSpinner/spinner';
@@ -33,7 +34,7 @@ const Admin = () => {
     getWaivers();
   }, []);
 
-  const getDate = (uploadDate) => uploadDate;
+  const getDate = (uploadDate) => moment(uploadDate).format('MM/DD/YY');
 
   const selectWaiver = (event) => {
     const tablerow = event.target.parentNode.parentNode;
@@ -185,10 +186,9 @@ const Admin = () => {
             <tr>
               <th>&nbsp;</th>
               <th>Name</th>
-              <th>Form</th>
               <th>Role</th>
               <th>Date Signed</th>
-              <th>Notes</th>
+              <th>Notes (100 chars)</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -206,7 +206,6 @@ const Admin = () => {
                       onChange={selectWaiver}
                     />
                   </td>
-                  <td>{waiver.name}</td>
                   <td>
                     <a
                       className="waiver-form"
@@ -214,12 +213,12 @@ const Admin = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {waiver.fileName}
+                      {waiver.name}
                     </a>
                   </td>
-                  <td>{waiver.role}</td>
+                  <td>{waiver.role || 'none' }</td>
                   <td>{getDate(waiver.createdDateTime)}</td>
-                  <td>{waiver.notes}</td>
+                  <td className="waiver-notes-display">{waiver.notes}</td>
                   <td>
                     <button type="button" className="waiver-edit-btn" onClick={() => editWaiver(waiver.id)}>
                       <img src="icons/edit-icon.png" alt="Edit Icon" height="15px" />
