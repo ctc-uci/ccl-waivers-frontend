@@ -10,17 +10,17 @@ function WaiverDisplay({ match }) {
   const history = useHistory();
   const [pdfService, setPdfService] = useState(null);
   const [submitReady, setSubmitReady] = useState(false);
-  // const [isSuccess, setSuccess] = useState(sessionStorage.getItem('waiversuccess') || false);
   const [template, setTemplate] = useState('');
-  // const [isLoading, setIsLoading] = useState(true);
-
   const pdfViewer = useRef(null);
+
   const getPDF = () => {
     setTemplate(`https://publicwaivers.s3-us-west-1.amazonaws.com/templates/${match.params.id}.pdf`);
     // setIsLoading(false);
   };
 
   useEffect(() => {
+    // ping heroku to wake up backend from cold start
+    axios.get(`${config.apiUrl}/`);
     getPDF();
     // OnLoad, PDFViewer emits a reference to its pdfService.
     // Save the reference to the pdfService so we can use it later.
@@ -30,6 +30,7 @@ function WaiverDisplay({ match }) {
       setPdfService(event.detail);
     });
   });
+
   // Download PDF (demo)
   //
   // The first line is how we fetch the pdf as a blob.
