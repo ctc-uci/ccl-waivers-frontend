@@ -93,14 +93,21 @@ const Admin = () => {
 
   const deleteWaivers = () => {
     async function deleteWaiver(id) {
-      await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+      try {
+        await axios.delete(`${config.apiUrl}/waivers/${id}`, { withCredentials: true });
+      } catch (err) {
+        console.log(err);
+        alert(err);
+      }
     }
-    if (filesSelected.length !== 0) {
+    if (filesSelected.length) {
       for (let i = 0; i < filesSelected.length; i += 1) {
         deleteWaiver(filesSelected[i]);
       }
-      setIsLoading(true);
-      getWaivers();
+
+      const resultList = waiverList.filter((waiver) => !filesSelected.includes(waiver.id));
+      setWaiverList(resultList);
+      setWaiverListFiltered(resultList);
       setFilesSelected([]);
     }
   };
